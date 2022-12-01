@@ -2,6 +2,11 @@ package project.tt.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import project.tt.vo.GroupVO;
+import project.tt.vo.NewsVO;
+import project.tt.vo.ScheduleVO;
 import project.tt.vo.UserVO;
 
 
@@ -26,5 +31,14 @@ public interface UserDAO {
 	public UserVO pw(UserVO uservo);//비밀번호 확인
 	int modify(UserVO uservo);//회원 수정
 	int delete(UserVO uservo);//회원 탈퇴
+	
+	List<GroupVO> userrVO();
+	
+	List<GroupVO> a(String alpha);
+	
+	List<NewsVO> allnews();
+	
+	List<ScheduleVO> allSchedule(@Param("month1") String month1,@Param("alpha1") String alpha1);
+	List<ScheduleVO> allSchedule1(String alpha2);
 	
 }

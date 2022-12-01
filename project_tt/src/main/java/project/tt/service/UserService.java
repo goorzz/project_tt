@@ -2,6 +2,9 @@ package project.tt.service;
 
 import java.util.List;
 
+import project.tt.vo.GroupVO;
+import project.tt.vo.NewsVO;
+import project.tt.vo.ScheduleVO;
 import project.tt.vo.UserVO;
 
 
@@ -25,4 +28,14 @@ public interface UserService {
 	public UserVO pw(UserVO uservo);//비밀번호 확인
 	public void modify(UserVO uservo);//회원 수정
 	public void delete(UserVO uservo);//회원 탈퇴
+	
+	//조별리그 쿼리 list
+    public List<GroupVO> selectUser() throws Exception;
+    public List<GroupVO> selectUserA(String alpha) throws Exception;
+
+	//news 쿼리 list
+	public List<NewsVO> selectUsernews() throws Exception;
+	
+	//Schedule 쿼리 list
+	public List<ScheduleVO> selectUserSchedule(String month1, String alpha1) throws Exception;
 }
