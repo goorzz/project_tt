@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.mit.c301.dao.UserrDAO">
+
+	<!-- 조별리그 전체 보기 (그룹순->순위순 정렬)
+	<select id="userrVO" resultType="edu.mit.c301.vo.UserrVO">
+		select * from tt_rank order by r_group asc, r_rank asc
+	</select>-->
+	
+	<!-- 조별리그 메인 보기 (main은 A조)-->
+	<select id="userrVO" resultType="edu.mit.c301.vo.UserrVO">
+		select * from tt_rank where r_group="A조" order by R_RANK
+	</select>
+	
+	<!-- 조별리그 A조 -->
+	<select id="a" resultType="edu.mit.c301.vo.UserrVO">
+		select * from tt_rank where r_group=concat(#{alpha},"조") order by R_RANK
+	</select>
+
+
+
+
+	<!--                        뉴스 쿼리                                          -->
+	
+	<select id="allnews" resultType="edu.mit.c301.vo.NewsVO">
+		select * from tt_news order by n_date desc ,n_no
+	</select>
+	
+	<!--                        경기일정 쿼리                                          -->	
+	<!-- 메인은 디데이 -->
+	<select id="allSchedule" resultType="edu.mit.c301.vo.ScheduleVO">
+		select * from tt_schedule where date=CONCAT(#{month1},'월',#{alpha1},'일')
+	</select>
+	
+	<!-- 12월
+	<select id="allSchedule1" resultType="edu.mit.c301.vo.ScheduleVO">
+			select * from tt_schedule where date=12
+		select * from tt_schedule where date=CONCAT('12월',#{alpha2},'일')
+	</select>  -->
+	
+
+
+
+
+
+
+
+
+</mapper>
