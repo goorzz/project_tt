@@ -28,18 +28,16 @@ public class SearchController {
 		
 	}	
 	@RequestMapping("/showID")
-	public String showID(Model model, UserVO vo, HttpServletResponse response) throws IOException {
-		PrintWriter writer = response.getWriter();
+	public String showID(Model model, UserVO vo) throws IOException {
+
 		if(vo.getUser_name()=="") {
-			writer.println("<script>alert('이름을 입력해주세요.'); </script>");
-			writer.flush();
+			model.addAttribute("text","이름을 입력해주세요.");
 			return "searchID";
 		}else if(vo.getUser_tel()=="") {
-			writer.println("<script>alert('전화번호를 입력해주세요.'); </script>");
-			writer.flush();
+			model.addAttribute("text","전화번호를 입력해주세요.");
 			return "searchID";
 		}else if(service.idSearch(vo)==null) {
-
+			model.addAttribute("text","등록되지않은 사용자 입니다.");
 			return "searchID";
 		}else {	
 			model.addAttribute("id",service.idSearch(vo).getUser_id());
@@ -47,18 +45,16 @@ public class SearchController {
 		}
 	}	
 	@RequestMapping("/showPW")
-	public String showPW(Model model, UserVO vo, HttpServletResponse response) throws IOException {
-		PrintWriter writer = response.getWriter();
+	public String showPW(Model model, UserVO vo) throws IOException {
+
 		if(vo.getUser_id()=="") {
-			writer.println("<script>alert('ID를 입력해주세요.'); </script>");
-			writer.flush();
+			model.addAttribute("text","ID를 입력해주세요.");
 			return "searchPW";
 		}else if(vo.getUser_tel()=="") {
-			writer.println("<script>alert('전화번호를 입력해주세요.'); </script>");
-			writer.flush();
+			model.addAttribute("text","전화번호를 입력해주세요.");
 			return "searchPW";
 		}else if(service.pwSearch(vo)==null) {
-			
+			model.addAttribute("text","등록되지않은 사용자 입니다.");			
 			return "searchPW";
 		}else {	
 			model.addAttribute("pw",service.pwSearch(vo).getUser_pw());

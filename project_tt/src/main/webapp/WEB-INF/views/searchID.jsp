@@ -16,7 +16,7 @@
 	<form action="/showID" method="get" style="height: 182px; ">
 		<input type="text" value="이름" name="user_name" style="WIDTH: 160pt; HEIGHT: 40pt"> <br>
 		<input type="text" value="전화번호" name="user_tel" style="WIDTH: 160pt; HEIGHT: 40pt"> <br><br>
-		<input type="submit" value ="아이디 찾기" style="WIDTH: 160pt; HEIGHT: 30pt">  
+		<input type="submit" value ="아이디 찾기" style="WIDTH: 160pt; HEIGHT: 30pt"> ${text}
 	</form>
 		<input type="button" value="메인 이동" onclick="location.href='/main'" style="WIDTH: 160pt; HEIGHT: 30pt"/>	
 </body>
