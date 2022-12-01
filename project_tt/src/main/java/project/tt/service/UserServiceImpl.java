@@ -55,7 +55,6 @@ public class UserServiceImpl implements UserService {
 		
 		return dao.idSearch(vo);
 	}
-
 	@Override
 	public UserVO pwSearch(UserVO vo) {
 		
@@ -65,4 +64,21 @@ public class UserServiceImpl implements UserService {
 	public UserVO loginidpw(UserVO vo) {	
 		return dao.loginidpw(vo);
 		}
+	
+	@Override//수정
+	public void modify(UserVO uservo) {
+		dao.modify(uservo);
+		
+	}
+
+	@Override//탈퇴
+	public void delete(UserVO uservo) {
+		dao.delete(uservo);
+		
+	}
+
+	@Override//비밀번호 확인
+	public UserVO pw(UserVO uservo) {		
+		return dao.pw(uservo);
+	}
 }

@@ -148,6 +148,44 @@ public class MembershipController {
     	session.removeAttribute("user");
     	return"/main";
     }
+	 @GetMapping("/mypagentry")//비밀번호 재인증
+     void mypagentry() {  
+		 
+	    }
+	    
+	 @PostMapping("/mypagentry")//비밀번호 재인증
+	 public String pw(UserVO uservo) {
+	    	UserVO user = service.pw(uservo);
+	     	if(user!=null) {    		
+	    		return "redirect:mypage";	    		
+	    	}else {			
+	    		return "redirect:mypagentry";
+	    	}
+	    }
+	    
+	 @GetMapping("/mypage")//탈퇴
+	 void mypage() {   
+		 
+	  }
+	 
+	  @PostMapping("/mypage")//수정
+	  String mypage1(UserVO uservo,HttpSession session) {
+		  service.modify(uservo);  
+		  session.removeAttribute("user");
+		  return "/main";
+	  }
+	  
+	  @GetMapping("/deletem")//탈퇴
+	  void deletem() {
+		  
+	  }
+	  
+	   @PostMapping("/deletem")//탈퇴
+	   String deletem1(UserVO uservo,HttpSession session) {
+		   service.delete(uservo);
+		   session.removeAttribute("user");
+		   return "/main";
+	   }
 	
 }	
 	

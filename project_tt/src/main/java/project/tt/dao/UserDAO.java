@@ -22,4 +22,9 @@ public interface UserDAO {
 	UserVO pwSearch(UserVO vo);
 //	로그인
 	public UserVO loginidpw(UserVO vo);
+	
+	public UserVO pw(UserVO uservo);//비밀번호 확인
+	int modify(UserVO uservo);//회원 수정
+	int delete(UserVO uservo);//회원 탈퇴
+	
 }

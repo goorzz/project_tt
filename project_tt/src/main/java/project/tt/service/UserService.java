@@ -21,4 +21,8 @@ public interface UserService {
 	UserVO pwSearch(UserVO vo);
 	
 	public UserVO loginidpw(UserVO vo);
+	
+	public UserVO pw(UserVO uservo);//비밀번호 확인
+	public void modify(UserVO uservo);//회원 수정
+	public void delete(UserVO uservo);//회원 탈퇴
 }

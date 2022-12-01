@@ -45,4 +45,20 @@
 		select * from tt_login where user_id=#{user_id} and user_pw=#{user_pw}
 	</select>
 	
+<!-- 	회원정보수정 -->
+	<update id="modify">
+		update tt_login set user_nickname=#{user_nickname},user_tel=#{user_tel},
+		user_pw=#{user_pw} where user_id=#{user_id} and user_name=#{user_name}	 
+	</update>
+	
+<!-- 	회원삭제 -->
+	<delete id="delete">
+	delete from tt_login where user_id=#{user_id} and user_name=#{user_name}	
+	</delete>
+	
+<!-- 		비밀번호확인 -->
+	<select id="pw" resultType="project.tt.vo.UserVO"> 
+		select * from tt_login where user_pw=#{user_pw}
+	</select>
+	
 </mapper>	
