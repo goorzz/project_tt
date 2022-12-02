@@ -59,9 +59,15 @@ ID:<input type="text" name="user_name" value="${user.user_id}" readonly  style="
   </form>
     <script type="text/javascript">
   function test1(){
-	  if(confirm("회원 탈퇴시 모든 정보가 삭제됩니다.\n정말 회원을 탈퇴하시겠습니까?")) {
+      var p1 = document.getElementById("user_pw1").value;
+      var p2 = document.getElementById('user_pw2').value;
+      if( p1 != p2 ) {
+          alert("비밀번호가 일치 하지 않습니다");    
+          return false;
+	  }else{
+	  	(confirm("회원 탈퇴시 모든 정보가 삭제됩니다.\n정말 회원을 탈퇴하시겠습니까?")) 
 		    window.location.href = "/main"
-		    	$("#form2").submit();
+		    $("#form2").submit();
 		}
       
   }
