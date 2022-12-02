@@ -91,38 +91,29 @@ public class UserServiceImpl implements UserService {
 	public List<GroupVO> getGroup_main() {
 		return dao.getGroup_main();
 	}
-	@Override // 그룹가져오기(메인)
+	
+	@Override // 그룹가져오기
 	public List<GroupVO> getGroup(String group) {
 		return dao.getGroup(group);
-	}
-
-	
-	@Override // 스케쥴가져오기(메인)
-	public List<ScheduleVO> getSchedule_main() {
-		return dao.getSchedule_main();
 	}
 
 	@Override // news가져오기
 	public List<NewsVO> getNews() {
 		return dao.getNews();
 	}
-
-//	@Override
-//	public List<ScheduleVO> selectUserSchedule(String month1, String alpha1) throws Exception {
-//		if(alpha1.equals("없어")) {
-//			SimpleDateFormat date = new SimpleDateFormat("d"); // 날짜 부분  dd=03일 04일   MM = 월 / mm = 분 
-//			Calendar c1 = Calendar.getInstance();
-//			String today=date.format(c1.getTime());
-//			alpha1=today;
-//		}
-//		if(month1.equals("없어")) {
-//			SimpleDateFormat date = new SimpleDateFormat("M"); // 날짜 부분  dd=03일 04일   MM = 월 / mm = 분 
-//			Calendar c1 = Calendar.getInstance();
-//			String today=date.format(c1.getTime());
-//			month1=today;
-//		}
-//
-//		
-//		return dao.allSchedule(month1,alpha1);
-//	}
+	
+	@Override // 스케쥴가져오기(메인)
+	public List<ScheduleVO> getSchedule_date() {
+		return dao.getSchedule_date();
+	}
+	
+	@Override // 스케쥴가져오기
+	public List<ScheduleVO> getSchedule(String date) {
+		return dao.getSchedule(date);
+	}
+	
+	@Override // 스케쥴가져오기
+	public List<ScheduleVO> getSchedule_name(String name_1) {
+		return dao.getSchedule(name_1);
+	}
 }

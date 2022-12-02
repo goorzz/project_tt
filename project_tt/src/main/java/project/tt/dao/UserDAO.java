@@ -35,15 +35,14 @@ public interface UserDAO {
 	//조별 경기 가져오기
 	List<GroupVO> getGroup_main();
 	List<GroupVO> getGroup(String group);
-	
-	//월드컵 일정가져오기
-	List<ScheduleVO> getSchedule_main();
-	
+
 	//월드컵뉴스 가져오기
 	List<NewsVO> getNews();
-	
-//	List<ScheduleVO> allSchedule(@Param("month1") String month1,@Param("alpha1") String alpha1);
-	List<ScheduleVO> allSchedule1(String alpha2);
+
+	//월드컵 일정가져오기
+	List<ScheduleVO> getSchedule(String date);
+	List<ScheduleVO> getSchedule_date();
+	List<ScheduleVO> getSchedule_name(String name_1);
 
 
 	

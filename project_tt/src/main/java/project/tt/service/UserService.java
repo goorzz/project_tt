@@ -32,11 +32,14 @@ public interface UserService {
 	//조별리그 쿼리 list
     public List<GroupVO> getGroup_main();
     public List<GroupVO> getGroup(String group);
+    
+	
+	//Schedule 쿼리 list
+	List<ScheduleVO> getSchedule_date();
+	List<ScheduleVO> getSchedule(String date);
+	List<ScheduleVO> getSchedule_name(String name_1);
 
 	//news 쿼리 list
 	public List<NewsVO> getNews();
-	
-	//Schedule 쿼리 list
-//	public List<ScheduleVO> selectUserSchedule(String month1, String alpha1) throws Exception;
-	List<ScheduleVO> getSchedule_main();
+
 }

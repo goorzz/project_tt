@@ -72,19 +72,21 @@
 	</select>
 
 	<!--뉴스 쿼리 -->
-	
 	<select id="getNews" resultType="project.tt.vo.NewsVO">
 		select * from tt_news where n_date = date_format(now(),'%Y%m%e')
 	</select>
 	
-	<!--경기일정 쿼리(메인은 오늘)-->	
-	<select id="getSchedule_main" resultType="project.tt.vo.ScheduleVO">
-		select * from tt_schedule where date = date_format(now(),'%m월%e일')
-	</select>	
-
-	<select id="allSchedule" resultType="project.tt.vo.ScheduleVO">
-		select * from tt_schedule where date=CONCAT(#{month1},'월',#{alpha1},'일')
+	<!--경기일정 쿼리 -->	
+	<select id="getSchedule" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_schedule where date=#{date}
 	</select>
 	
+	<select id="getSchedule_date" resultType="project.tt.vo.ScheduleVO">
+		select distinct date from tt_schedule
+	</select>	
+	
+	<select id="getSchedule_name" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_schedule where name_1=#{name_1} or name_2=#{name_1}
+	</select>	
 
 </mapper>	
