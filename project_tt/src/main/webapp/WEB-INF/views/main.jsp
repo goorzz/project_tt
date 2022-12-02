@@ -8,33 +8,44 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<!-- 스크립트 -->
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	function test() {
+		var userId = document.getElementById("user_id1").value;
+		var userPwd = document.getElementById("user_pw1").value;
+    if(userId == "") {
+        alert("아이디를 입력해주세요.");
+        return false;
+    }
+    else if(userPwd == "") {
+        alert("비밀번호를 입력해주세요.");
+        return false;
+    }
+}
+</script>
 <body>
- <h1>메인화면 (test중)</h1>
- 	<form action="/main" method="post">
-		<input type="text" id ="user_id1"name="user_id" placeholder="아이디"><br>
-		<input type="password" id ="user_pw1"name="user_pw" placeholder="비밀번호"><br>
-		<input type="submit" onclick="test()" value="로그인">
-	</form>
- 	<input type="button" value="회원가입" onclick="location.href='/membership'" style="width: 125px; height: 56px">
- 	<input type="button" value="ID/PW찾기" onclick="location.href='/searchID'" style="width: 125px; height: 56px"> <br>
- 	<input type="button" value="게시판" onclick="location.href='/board/list'" style="width: 125px; height: 56px">
- 	
-	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script type="text/javascript">
-  function test() {
-	  var userId = document.getElementById("user_id1").value;
-      var userPwd = document.getElementById("user_pw1").value;
-      if(userId == "") {
-          alert("아이디를 입력해주세요.");
-          return false;
-      }
-      else if(userPwd == "") {
-          alert("비밀번호를 입력해주세요.");
-          return false;
-      }
 
-  }
-  </script>
+	<c:if test="${empty user}">
+	<h1>메인화면 (login 전)</h1>
+		<form action="/login" method="post">
+			<input type="text" id ="user_id1"name="user_id" placeholder="아이디"><br>
+			<input type="password" id ="user_pw1"name="user_pw" placeholder="비밀번호"><br>
+			<input type="submit" onclick="test()" value="로그인">
+		</form> <br><br>
+		 	<input type="button" value="회원가입" onclick="location.href='/membership'" style="width: 125px; height: 56px">
+		 	<input type="button" value="ID/PW찾기" onclick="location.href='/searchID'" style="width: 125px; height: 56px"> <br><br>
+ 	</c:if>
+ 	<c:if test="${! empty user}">		 	
+	<h1>메인화면 (login 후)</h1>
+ 		${user.user_nickname}님
+ 		<a href="logout">로그아웃</a><br>
+ 		<a href="mypagentry">마이페이지</a>  <br><br>	
+ 		
+ 		<input type="button" value="게시판" onclick="location.href='/board/list'" style="width: 125px; height: 56px">
+	</c:if>	 	
+
+
  	<div class="table.type07"></div>
 	<table>
     <h1>조별 순위 보기</h1>

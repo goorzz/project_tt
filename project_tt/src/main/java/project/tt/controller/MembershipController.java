@@ -124,29 +124,24 @@ public class MembershipController {
 		model.addAttribute("tel",vo.getUser_tel());			
 		return "membership";
 	}
-	@GetMapping("/main1")
-	void main1() {
-	    	
-	    }
-	   
 	    
-	@PostMapping("/main") // 관우씨
-	public String loginsueecess(UserVO vo,HttpSession session) {
+	@PostMapping("/login") // 관우씨
+	public String loginsueecess(UserVO vo,HttpSession session,Model model) {
 	    	
 	    	UserVO user = service.loginidpw(vo);
 	    	
 	    	if(user!=null) {
 	    		session.setAttribute("user", user);
-	    		return "redirect:main1";
+	    		return "redirect:/";
 	    		
 	    	}else {		
-	    		return "redirect:main";
+	    		return "redirect:/";
 	    }
 	}
 	@GetMapping("/logout")
     public String logout(UserVO vo,HttpSession session) {
     	session.removeAttribute("user");
-    	return"/main";
+    	return"redirect:/";
     }
 	 @GetMapping("/mypagentry")//비밀번호 재인증
      void mypagentry() {  
