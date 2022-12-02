@@ -41,9 +41,10 @@
  		${user.user_nickname}님
  		<a href="logout">로그아웃</a><br>
  		<a href="mypagentry">마이페이지</a>  <br><br>	
- 		
+ 	</c:if>		
  		<input type="button" value="게시판" onclick="location.href='/board/list'" style="width: 125px; height: 56px">
-	</c:if>	 	
+ 		<input type="button" value="승부예측" onclick="location.href='/board/list'" style="width: 125px; height: 56px">
+	 	
 
 
  	<div class="table.type07"></div>

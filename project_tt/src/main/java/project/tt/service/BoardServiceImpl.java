@@ -62,8 +62,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int getTotal() { // 게시물 총갯수
-		return mapper1.getTotal();
+	public int getTotal(Criteria cri) { // 게시물 총갯수
+		return mapper1.getTotal(cri);
 	}
 
 	@Override

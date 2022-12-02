@@ -36,7 +36,7 @@ public class BoardController {
 		}
 		cri.set_skip();
 		model.addAttribute("list",service.boardPaging(cri));
-		int total = service.getTotal();
+		int total = service.getTotal(cri);
 		PageDTO  pagebar1 = new PageDTO(cri, total);
 		model.addAttribute("pagebar", pagebar1);
 	

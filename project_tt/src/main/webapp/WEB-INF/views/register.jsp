@@ -9,7 +9,7 @@
 <body>
 	<h1> 회원가입 완료</h1><br>
 		
-	<input type="button" value="뒤로가기" onclick="location.href='/membership'"/>
+	<input type="button" value="메인으로" onclick="location.href='/'"/>
 
 
 

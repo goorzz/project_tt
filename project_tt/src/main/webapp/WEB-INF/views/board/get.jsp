@@ -80,7 +80,7 @@
  		<!--  -->
  			<form action="get" method="post">
  				<input type="hidden" name="bno"value="${board.bno} ">
-				작성자:<input type ="text" name="user_nickname" placeholder="작성자를 입력해주세요."style="width:500px;font-size:10px;"><br>
+				닉네임:<input type ="text" name="user_nickname" placeholder="작성자를 입력해주세요."style="width:500px;font-size:10px;"><br>
  				댓글내용:<textarea name="reply_content" placeholder="댓글을 입력해주세요." class="form-control form-control-user" rows ="1" cols="30" ></textarea>
  				<input type="hidden" name="reply_date" value="${datenow}">
  				<input type="submit" value="댓글등록">

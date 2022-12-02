@@ -38,7 +38,7 @@ public interface BoardDAO {
 	//페이지처리 
 	public List<PageDTO> Criteria(Criteria cri);
 	// 게시판 총갯수 
-	public int getTotal();
+	public int getTotal(Criteria cri);
 	
 	//게시판 목록을 페이지 적용
 	public List<BoardVO> boardPaging(Criteria cri);

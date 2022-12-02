@@ -10,7 +10,7 @@
 	<h1> 아이디/비밀번호 찾기</h1><br>
 		회원님의 PW는 아래와 같습니다 <br>
 	<input type="text" value= "PW : ${pw }" style="height: 50px; width: 195px"/> <br><br>
-	<input type="button" value="메인 이동" onclick="location.href='/main'" style="height: 51px; width: 93px"/>
+	<input type="button" value="메인 이동" onclick="location.href='/'" style="height: 51px; width: 93px"/>
 	<input type="button" value="뒤로 가기" onclick="location.href='/searchID'"style="height: 51px; width: 93px"/>
 
 

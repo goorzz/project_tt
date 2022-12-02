@@ -29,7 +29,7 @@ public interface BoardService {
 		public int view_count(int bno);
 		
 		// 게시판 총 갯수
-		public int getTotal();
+		public int getTotal(Criteria cri);
 		// 게시판 페이징처리
 		List<BoardVO> boardPaging(Criteria cri);
 		

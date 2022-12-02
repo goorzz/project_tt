@@ -3,6 +3,37 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.tt.dao.BoardDAO">
+<sql id="criteria">
+	 <trim prefix="Where (" suffix=")" prefixOverrides="OR">
+	 	<foreach collection="typeArr" item="type">
+	 		<trim prefix="OR">
+		 		<choose>
+		 			<when test="type == 'T'.toString">
+		 				title like concat('%',#{keyword},'%')
+		 			</when>
+		 			<when test="type == 'C'.toString">
+		 				content like concat('%',#{keyword},'%')
+		 			</when>
+		 			<when test="type == 'U'.toString">
+		 				user_nickname like concat('%',#{keyword},'%')
+		 			</when>	 		
+		 		</choose>
+		 	</trim>
+	  	</foreach>
+	 </trim>
+</sql>
+
+
+	<!-- 자유게시판 목록 페이징하기 -->
+	<select id ="boardPaging" resultType="project.tt.vo.BoardVO">
+			select * from(select * from tt_board
+			
+			<if test="keyword != null">
+				<include refid="criteria"></include>
+			</if>
+               order by bno desc) as t1 
+          		 limit #{skip},#{amount}
+	</select>
 
 	<select id="getList"  resultType="project.tt.vo.BoardVO">
 		select * from tt_board order by bno desc
@@ -57,17 +88,11 @@
 		update tt_board set VIEW_COUNT=VIEW_COUNT+1 where bno=#{bno}
 	</update>
 	
-	<!-- 전체 게시물 수 -->
+<!-- 전체 게시물 수 -->
 	<select id="getTotal" resultType="int">
-		select count(*)from tt_board	 
+		select count(*)from tt_board
+			<if test="keyword != null">
+   				<include refid="criteria"></include>
+   			</if>
 	</select>
-	
-	<!-- 자유게시판 목록 페이징하기 -->
-	<select id ="boardPaging" resultType="project.tt.vo.BoardVO">
-			select * from(
-			select bno ,title ,user_nickname ,date, good, bad, view_count 
-			from tt_board order by bno desc) as t1
-			limit #{skip},#{amount}		
-	</select>
-	
 </mapper>

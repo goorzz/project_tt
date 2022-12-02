@@ -12,6 +12,22 @@
 <body>
 <h1> 월드컵 자유게시판  </h1>
 <button onclick="location.href = 'register'">글작성</button>
+<form action="/board/list" method="get">
+	<select name= 'type'>
+		<option value="T">제목</option>
+		<option value="C">내용 </option>
+		<option value="U">닉네임 </option>
+		<option value="TU">제목 or 닉네임</option>
+		<option value="TC">제목 or 내용</option>
+		<option value="TU">제목 or 닉네임 </option>
+		<option value="TCU">제목 or 내용 or 닉네임 </option>
+		</select>
+		<input type="text" name='keyword'value="${pagebar.cri.keyword}" />
+		<input type="hidden" name="pageNum" value="${pagebar.cri.pageNum}">
+		<input type="hidden" name="amount" value="${pagebar.cri.amount}">
+
+		<button class='btn-default'>검색</button>
+</form>
 <table class="table table-bordered" border="1">
                                     <thead>
                                         <tr>
