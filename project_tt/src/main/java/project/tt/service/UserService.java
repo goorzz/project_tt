@@ -30,12 +30,13 @@ public interface UserService {
 	public void delete(UserVO uservo);//회원 탈퇴
 	
 	//조별리그 쿼리 list
-    public List<GroupVO> selectUser() throws Exception;
-    public List<GroupVO> selectUserA(String alpha) throws Exception;
+    public List<GroupVO> getGroup_main();
+    public List<GroupVO> getGroup(String group);
 
 	//news 쿼리 list
-	public List<NewsVO> selectUsernews() throws Exception;
+	public List<NewsVO> getNews();
 	
 	//Schedule 쿼리 list
-	public List<ScheduleVO> selectUserSchedule(String month1, String alpha1) throws Exception;
+//	public List<ScheduleVO> selectUserSchedule(String month1, String alpha1) throws Exception;
+	List<ScheduleVO> getSchedule_main();
 }

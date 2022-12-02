@@ -40,47 +40,48 @@
 	<select id="pwSearch" resultType="project.tt.vo.UserVO">
     	select user_pw from tt_login where user_id=#{user_id} and user_tel=#{user_tel}
 	</select>
+	
 	<!-- 로그인 -->
 	<select id="loginidpw" resultType="project.tt.vo.UserVO">
 		select * from tt_login where user_id=#{user_id} and user_pw=#{user_pw}
 	</select>
 	
-<!-- 회원정보수정 -->
+	<!-- 회원정보수정 -->
 	<update id="modify">
 		update tt_login set user_nickname=#{user_nickname},user_tel=#{user_tel},
 		user_pw=#{user_pw} where user_id=#{user_id} and user_name=#{user_name}	 
 	</update>
 	
-<!-- 회원삭제 -->
+	<!-- 회원삭제 -->
 	<delete id="delete">
 	delete from tt_login where user_id=#{user_id} and user_name=#{user_name}	
 	</delete>
 	
-<!-- 비밀번호확인 -->
+	<!-- 비밀번호확인 -->
 	<select id="pw" resultType="project.tt.vo.UserVO"> 
 		select * from tt_login where user_id=#{user_id} and user_pw=#{user_pw}
 	</select>
 	
-
-	
 	<!-- 조별리그 메인 보기 (main은 A조)-->
-	<select id="userrVO" resultType="project.tt.vo.GroupVO">
+	<select id="getGroup_main" resultType="project.tt.vo.GroupVO">
 		select * from tt_rank where r_group="A조" order by R_RANK
 	</select>
 	
-	<!-- 조별리그 A조 -->
-	<select id="a" resultType="project.tt.vo.GroupVO">
-		select * from tt_rank where r_group=concat(#{alpha},"조") order by R_RANK
+	<select id="getGroup" resultType="project.tt.vo.GroupVO">
+		select * from tt_rank where r_group=#{r_group} order by R_RANK
 	</select>
 
-	<!--                        뉴스 쿼리                                          -->
+	<!--뉴스 쿼리 -->
 	
-	<select id="allnews" resultType="project.tt.vo.NewsVO">
-		select * from tt_news order by n_date desc ,n_no
+	<select id="getNews" resultType="project.tt.vo.NewsVO">
+		select * from tt_news where n_date = date_format(now(),'%Y%m%e')
 	</select>
 	
-	<!--                        경기일정 쿼리                                          -->	
-	<!-- 메인은 디데이 -->
+	<!--경기일정 쿼리(메인은 오늘)-->	
+	<select id="getSchedule_main" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_schedule where date = date_format(now(),'%m월%e일')
+	</select>	
+
 	<select id="allSchedule" resultType="project.tt.vo.ScheduleVO">
 		select * from tt_schedule where date=CONCAT(#{month1},'월',#{alpha1},'일')
 	</select>

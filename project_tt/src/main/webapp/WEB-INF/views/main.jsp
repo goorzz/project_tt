@@ -38,47 +38,42 @@
  	<div class="table.type07"></div>
 	<table>
     <h1>조별 순위 보기</h1>
-    	<button class="a" type="button" onclick="location.href='/a?r_group=A&month1=${month1}&date=${date}'">A조</button>&nbsp;
-    	<button class="b" type="button" onclick="location.href='/a?r_group=B&month1=${month1}&date=${date}'">B조</button>&nbsp;
-    	<button class="c" type="button" onclick="location.href='/a?r_group=C&month1=${month1}&date=${date}'">C조</button>&nbsp;
-    	<button class="d" type="button" onclick="location.href='/a?r_group=D&month1=${month1}&date=${date}'">D조</button>&nbsp;
-    	<button class="e" type="button" onclick="location.href='/a?r_group=E&month1=${month1}&date=${date}'">E조</button>&nbsp;
-    	<button class="f" type="button" onclick="location.href='/a?r_group=F&month1=${month1}&date=${date}'">F조</button>&nbsp;
-    	<button class="g" type="button" onclick="location.href='/a?r_group=G&month1=${month1}&date=${date}'">G조</button>&nbsp;
-    	<button class="h" type="button" onclick="location.href='/a?r_group=H&month1=${month1}&date=${date}'">H조</button>
+		<!-- 월드컵 조별 보여주기 -->
+    	<c:forEach items="${g_list}" var="g_list">
+    		    	<button class="a" type="button" onclick="location.href='/group?r_group=${g_list}'">${g_list}</button>&nbsp;
+   		</c:forEach>
 
         <thead>
-            <tr>
-					<td><center>그룹</center></td>
-					<td><center>순위</center></td>
-					<td><center>나라이름</center></td>
-					<td><center>경기수</center></td>
-					<td><center>승</center></td>
-					<td><center>무</center></td>
-					<td><center>패</center></td>
-					<td><center>골득실</center></td>
-					<td><center>승점</center></td>
-            </tr>
+			<tr>
+				<td><center>그룹</center></td>
+				<td><center>순위</center></td>
+				<td><center>나라이름</center></td>
+				<td><center>경기수</center></td>
+				<td><center>승</center></td>
+				<td><center>무</center></td>
+				<td><center>패</center></td>
+				<td><center>골득실</center></td>
+				<td><center>승점</center></td>
+			</tr>
         </thead>
         <tbody>
-            <c:forEach items="${userrList}" var="user">
+            <c:forEach items="${group}" var="group">
                 <tr>
-           <!--     <td>${user.no}</td> --> 
-                    <td><center>${user.r_group}</center></td>
-                    <td><center>${user.r_rank}</center></td>
-                    <td><center>${user.r_name}</center></td>
-                    <td><center>${user.r_count}</center></td>
-                    <td><center>${user.r_win}</center></td>
-                    <td><center>${user.r_draw}</center></td>
-                    <td><center>${user.r_lose}</center></td>
-                    <td><center>${user.r_gain}</center></td>
-                    <td><center>${user.r_wincount}</center></td>
+                    <td><center>${group.r_group}</center></td>
+                    <td><center>${group.r_rank}</center></td>
+                    <td><center>${group.r_name}</center></td>
+                    <td><center>${group.r_count}</center></td>
+                    <td><center>${group.r_win}</center></td>
+                    <td><center>${group.r_draw}</center></td>
+                    <td><center>${group.r_lose}</center></td>
+                    <td><center>${group.r_gain}</center></td>
+                    <td><center>${group.r_wincount}</center></td>
                 </tr>
             </c:forEach>
         </tbody>
         </table>
         <br>
-        <!-- 					new기사 	                     -->
+        <!-- new기사 -->
    		<table>
    			   <tbody>
 				<tr>
@@ -87,7 +82,7 @@
 	            	<td><center>뉴스 기사</center></td>
 	            	<td><center>순위</center></td>
 				</tr>
-            <c:forEach items="${newsList}" var="news">
+            <c:forEach items="${news}" var="news">
                 <tr>
                     <td><center>${news.n_date}</center></td>
                     <td><center><a href="http://${news.n_url}">${news.n_title}</a></center></td>
@@ -99,7 +94,7 @@
     	<br>
     <table>
     	<!--                      경기일정						 -->
-    		<h2>경기일정</h2>
+    		<h2>오늘 경기일정</h2>
     			<button class="day1" type="button" onclick="location.href='/gametime?month1=11&date=21&r_group=${group}'">11월21일(수)</button>&nbsp;
     			<button class="day2" type="button" onclick="location.href='/gametime?month1=11&date=22&r_group=${group}'">11월22일(수)</button>&nbsp;
 		    	<button class="day3" type="button" onclick="location.href='/gametime?month1=11&date=23&r_group=${group}'">11월23일(수)</button>&nbsp;
@@ -136,7 +131,7 @@
 					<td><center>순위</center></td>
 					<td><center>경기날짜</center></td>
 					<td><center>조</center></td>
-					<td><center>게임여부</center></td>
+					<td><center>경기시간</center></td>
 					<td><center>홈</center></td>
 					<td><center>어웨이</center></td>
 					<td><center>홈 스코어</center></td>
@@ -144,16 +139,16 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach items="${schedulelist}" var="user">
+            <c:forEach items="${schedule}" var="schedule">
                 <tr>
-                    <td>${user.p_no}</td>
-                    <td>${user.date}</td>
-                    <td>${user.w_group}</td>
-                    <td>${user.time}</td>
-                    <td>${user.name_1}</td>
-                    <td>${user.name_1}</td>
-                    <td>${user.score_1}</td>
-                    <td>${user.score_2}</td>
+                    <td><center>${schedule.p_no}</center></td>
+                    <td><center>${schedule.date}</center></td>
+                    <td><center>${schedule.w_group}</center></td>
+                    <td><center>${schedule.time}</center></td>
+                    <td><center>${schedule.name_1}</center></td>
+                    <td><center>${schedule.name_2}</center></td>
+                    <td><center>${schedule.score_1}</center></td>
+                    <td><center>${schedule.score_2}</center></td>
                 </tr>
             </c:forEach>
            	 <c:forEach items="${schedulelist1}" var="user1">
@@ -163,7 +158,7 @@
                     <td>${user1.w_group}</td>
                     <td>${user1.time}</td>
                     <td>${user1.name_1}</td>
-                    <td>${user1.name_1}</td>
+                    <td>${user1.name_2}</td>
                     <td>${user1.score_1}</td>
                     <td>${user1.score_2}</td>
                 </tr>

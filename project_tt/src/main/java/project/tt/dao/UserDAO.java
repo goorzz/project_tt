@@ -32,13 +32,21 @@ public interface UserDAO {
 	int modify(UserVO uservo);//회원 수정
 	int delete(UserVO uservo);//회원 탈퇴
 	
-	List<GroupVO> userrVO();
+	//조별 경기 가져오기
+	List<GroupVO> getGroup_main();
+	List<GroupVO> getGroup(String group);
 	
-	List<GroupVO> a(String alpha);
+	//월드컵 일정가져오기
+	List<ScheduleVO> getSchedule_main();
 	
-	List<NewsVO> allnews();
+	//월드컵뉴스 가져오기
+	List<NewsVO> getNews();
 	
-	List<ScheduleVO> allSchedule(@Param("month1") String month1,@Param("alpha1") String alpha1);
+//	List<ScheduleVO> allSchedule(@Param("month1") String month1,@Param("alpha1") String alpha1);
 	List<ScheduleVO> allSchedule1(String alpha2);
+
+
+	
+
 	
 }

@@ -1,6 +1,8 @@
 package project.tt.controller;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,64 +24,49 @@ public class MainController {
 	
 	@RequestMapping("/")
 	public String main(Model model) throws Exception {
-		
-		String month1="없어";
-		String day1="없어";
-
-        List<GroupVO> userList = service.selectUser();
-        List<NewsVO> userList1 = service.selectUsernews();
-        List<ScheduleVO> userList2 = service.selectUserSchedule(month1,day1);
-        
-  
-        for (ScheduleVO temp : userList2) {
-        		}
-        model.addAttribute("userrList", userList);
-        model.addAttribute("newsList", userList1);
-        model.addAttribute("schedulelist", userList2);
-        
-        return "main";
-
-	}
-	@GetMapping("/a") //a조 화면 열기
-	public String a_class(String month1, ScheduleVO vo,GroupVO voo,  Model model) throws Exception {  
-		
 	
-		List<GroupVO> userList = service.selectUserA(voo.getR_group());
-        List<NewsVO> userList1 = service.selectUsernews();
-        List<ScheduleVO> userList2 = service.selectUserSchedule(month1, vo.getDate());
-        
+		ArrayList<String> grouplist = new ArrayList<>(Arrays.asList("A조","B조","C조","D조","E조","F조","G조","H조"));
 
-        for (NewsVO temp : userList1) {
-        	
-        		}
-	    model.addAttribute("group", voo.getR_group());
-        model.addAttribute("date", vo.getDate());
-        model.addAttribute("userrList", userList);
-        model.addAttribute("newsList", userList1);
-        model.addAttribute("schedulelist", userList2);
-        model.addAttribute("month1", month1);
+        model.addAttribute("g_list", grouplist);
+        model.addAttribute("group", service.getGroup_main());
+        model.addAttribute("schedule", service.getSchedule_main());
+        model.addAttribute("news", service.getNews());
+
+        return "main";
+	}
+	
+	@RequestMapping("/group") //a조 화면 열기
+	public String group(GroupVO gvo, Model model) throws Exception {  
+
+		ArrayList<String> grouplist = new ArrayList<>(Arrays.asList("A조","B조","C조","D조","E조","F조","G조","H조"));
+		
+        System.out.println(gvo.getR_group()+"");
+        model.addAttribute("g_list", grouplist);
+        model.addAttribute("group", service.getGroup(gvo.getR_group()));
+        model.addAttribute("schedule", service.getSchedule_main());
+//        model.addAttribute("newsList", userList1);
+
 		return "main";
 }
- 
 	@GetMapping("/gametime") //경기일정 날짜별 화면 열기 
 	public String b_class(String month1, ScheduleVO vo, GroupVO voo,  Model model) throws Exception {  
 		
 		
-		List<GroupVO> userList = service.selectUserA(voo.getR_group());
-        List<NewsVO> userList1 = service.selectUsernews();
-	    List<ScheduleVO> userList2 = service.selectUserSchedule(month1, vo.getDate());
+//		List<GroupVO> userList = service.selectUserA(voo.getR_group());
+//        List<NewsVO> userList1 = service.selectUsernews();
+//	    List<ScheduleVO> userList2 = service.selectUserSchedule(month1, vo.getDate());
 //	    List<ScheduleVO> userList3 = service.selectUserSchedule1(vo.getDate());
 	    
-	    for (ScheduleVO temp : userList2) {
-    		}
+//	    for (ScheduleVO temp : userList2) {
+//    		}
 //	    for (ScheduleVO temp : userList3) {
 //    		logger.info(temp.toString());
 //    		}
 	    model.addAttribute("group", voo.getR_group());
         model.addAttribute("date", vo.getDate());
-	    model.addAttribute("userrList", userList);
-        model.addAttribute("newsList", userList1);
-	    model.addAttribute("schedulelist", userList2);
+//	    model.addAttribute("userrList", userList);
+//        model.addAttribute("newsList", userList1);
+//	    model.addAttribute("schedulelist", userList2);
 //	    model.addAttribute("schedulelist1", userList3);
 		return "main";
 		
