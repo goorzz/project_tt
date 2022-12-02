@@ -30,6 +30,7 @@
 			<th><center>홈 스코어</center></th>
 			<th><center>어웨이 스코어</center></th>
 		</tr>
+		<!--날짜별 -->
 		<c:forEach items="${schedule}" var="schedule">
         <tr>
 			<td><center>${schedule.date}</center></td>
@@ -40,9 +41,21 @@
 			<td><center>${schedule.score_1}</center></td>
 			<td><center>${schedule.score_2}</center></td>
 		</tr>
-		</c:forEach>
-	</table>		
-	<input type="button" value="뒤로가기" onclick="location.href='/'"/>
+		</c:forEach> 
+		<!--국가별 -->
+		<c:forEach items="${schedule2}" var="schedule2">
+        <tr>
+			<td><center>${schedule2.date}</center></td>
+			<td><center>${schedule2.w_group}</center></td>
+			<td><center>${schedule2.time}</center></td>
+			<td><center>${schedule2.name_1}</center></td>
+			<td><center>${schedule2.name_2}</center></td>
+			<td><center>${schedule2.score_1}</center></td>
+			<td><center>${schedule2.score_2}</center></td>
+		</tr>
+		</c:forEach>		
+	</table> <br>		
+	<input type="button" value="메인으로" onclick="location.href='/'"/>
 
 
 

@@ -85,8 +85,8 @@ public class MainController {
 	public String schedule(ScheduleVO svo, Model model) { 
 		
 		model.addAttribute("schedule_date", service.getSchedule_date());
-        model.addAttribute("schedule", service.getSchedule(svo.getDate()));
-//        model.addAttribute(attributeValue)
+        model.addAttribute("schedule2",service.getSchedule_name(svo.getName_1()));
+        model.addAttribute("schedule",service.getSchedule(svo.getDate()));
 		return "schedule";
 	}
 }

@@ -114,6 +114,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Override // 스케쥴가져오기
 	public List<ScheduleVO> getSchedule_name(String name_1) {
-		return dao.getSchedule(name_1);
+		return dao.getSchedule_name(name_1);
 	}
 }
