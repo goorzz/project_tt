@@ -53,8 +53,8 @@ ID:<input type="text" name="user_id" value="${user.user_id}" readonly  style="bo
   </script>
   
   <form id="form2" action="deletem" method="post">
-  <input type="hidden" name="user_id" value="${user.user_name}">
-  <input type="hidden" name="user_name" value="${user.user_id}"><br>
+  <input type="hidden" name="user_id" value="${user.user_id}">
+  <input type="hidden" name="user_name" value="${user.user_name}"><br>
   <input type="button" onclick="test1()" value="회원탈퇴">
   </form>
     <script type="text/javascript">
