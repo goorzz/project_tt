@@ -39,8 +39,9 @@
  	<c:if test="${! empty user}">		 	
 	<h1>메인화면 (login 후)</h1>
  		${user.user_nickname}님
- 		<a href="logout">로그아웃</a><br>
- 		<a href="mypagentry">마이페이지</a>  <br><br>	
+ 		<a href="logout">로그아웃</a> <br>	
+ 		보유 포인트 : ${user.user_point} <br>
+ 		<a href="mypagentry">마이페이지</a>	<br>
  	</c:if>		
  		<input type="button" value="게시판" onclick="location.href='/board/list'" style="width: 125px; height: 56px">
  		<input type="button" value="승부예측" onclick="location.href='/toto/tmain?date=${s_date}'" style="width: 125px; height: 56px">

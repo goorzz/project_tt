@@ -7,6 +7,7 @@ public class UserVO {
 	private String user_name;
 	private String user_nickname;
 	private String user_tel;
+	private int user_point;
 	
 	private String pw_check2;	
 	
@@ -52,6 +53,13 @@ public class UserVO {
 	public void setPw_check2(String pw_check2) {
 		this.pw_check2 = pw_check2;
 	}
+	public int getUser_point() {
+		return user_point;
+	}
+	public void setUser_point(int user_point) {
+		this.user_point = user_point;
+	}
+	
 
 //	@Override
 //	public int hashCode() {
