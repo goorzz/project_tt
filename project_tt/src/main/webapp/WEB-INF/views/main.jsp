@@ -43,7 +43,7 @@
  		<a href="mypagentry">마이페이지</a>  <br><br>	
  	</c:if>		
  		<input type="button" value="게시판" onclick="location.href='/board/list'" style="width: 125px; height: 56px">
- 		<input type="button" value="승부예측" onclick="location.href='/board/list'" style="width: 125px; height: 56px">
+ 		<input type="button" value="승부예측" onclick="location.href='/toto/tmain?date=${s_date}'" style="width: 125px; height: 56px">
 	 	
 
 
@@ -89,7 +89,7 @@
    		<table>
    			   <tbody>
 				<tr>
-				<h2>오늘의 뉴스 TOP 5</h2>
+				<h1>오늘의 뉴스 TOP 5</h1>
 	            	<td><center>날짜</center></td>
 	            	<td><center>뉴스 기사</center></td>
 	            	<td><center>순위</center></td>
@@ -106,7 +106,7 @@
     	<br>
     <table>
     <!-- 경기일정 -->
-	<h2>오늘 경기일정 <button type="button" onclick="location.href='/schedule?date=${s_date}'">더보기</button> </h2>
+	<h1>오늘 경기일정 <button type="button" onclick="location.href='/schedule?date=${s_date}'">더보기</button> </h1>
 		<tr>
 			<th><center>경기날짜</center></th>
 			<th><center>조</center></th>

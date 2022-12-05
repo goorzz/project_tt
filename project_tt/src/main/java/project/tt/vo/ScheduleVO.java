@@ -12,6 +12,7 @@ public class ScheduleVO {
 	private String name_2;	 // 팀2
 	private String score_1;  // 팀1 점수 
 	private String score_2; 	 // 팀2 점수
+	private String predict; // 예측결과
 	
 	@Override
 	public String toString() {
@@ -71,6 +72,12 @@ public class ScheduleVO {
 	}
 	public void setScore_2(String score_2) {
 		this.score_2 = score_2;
+	}
+	public String getPredict() {
+		return predict;
+	}
+	public void setPredict(String predict) {
+		this.predict = predict;
 	}
 	
 

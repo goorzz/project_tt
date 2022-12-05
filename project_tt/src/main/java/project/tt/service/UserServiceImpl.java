@@ -116,4 +116,20 @@ public class UserServiceImpl implements UserService {
 	public List<ScheduleVO> getSchedule_name(String name_1) {
 		return dao.getSchedule_name(name_1);
 	}
+	@Override // 스케쥴가져오기(승부예측용
+	public List<ScheduleVO> getSchedule_predict(String date) {
+		return dao.getSchedule_predict(date);
+	}
+	@Override // 스케쥴가져오기(승부예측용
+	public List<ScheduleVO> getSchedule_predict2(String name_1) {
+		return dao.getSchedule_predict2(name_1);
+	}
+	@Override // 스케쥴가져오기(승부예측용
+	public List<ScheduleVO> getSchedule_predict3(String date) {
+		return dao.getSchedule_predict3(date);
+	}
+	@Override // 스케쥴가져오기(승부예측용
+	public List<ScheduleVO> getSchedule_predict4(String name_1) {
+		return dao.getSchedule_predict4(name_1);
+	}
 }

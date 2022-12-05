@@ -43,9 +43,10 @@ public interface UserDAO {
 	List<ScheduleVO> getSchedule(String date);
 	List<ScheduleVO> getSchedule_date();
 	List<ScheduleVO> getSchedule_name(String name_1);
-
-
-	
-
+	//예측결과 포함 일정
+	List<ScheduleVO> getSchedule_predict(String date);
+	List<ScheduleVO> getSchedule_predict2(String name_1);
+	List<ScheduleVO> getSchedule_predict3(String date);
+	List<ScheduleVO> getSchedule_predict4(String name_1);
 	
 }

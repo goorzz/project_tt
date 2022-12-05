@@ -88,5 +88,23 @@
 	<select id="getSchedule_name" resultType="project.tt.vo.ScheduleVO">
 		select * from tt_schedule where name_1=#{name_1} or name_2=#{name_1}
 	</select>	
-
+	
+	<!--승부예측용 -->
+	<select id="getSchedule_predict" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_predict_groupstage where date=#{date}
+	</select>
+	
+	<select id="getSchedule_predict2" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_predict_groupstage where name_1=#{name_1} or name_2=#{name_1}
+	</select>
+	
+	<!--승부예측용(16강) -->
+	<select id="getSchedule_predict3" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_predict_roundover16 where date=#{date}
+	</select>
+	
+	<select id="getSchedule_predict4" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_predict_roundover16 where name_1=#{name_1} or name_2=#{name_1}
+	</select>	
+	
 </mapper>	

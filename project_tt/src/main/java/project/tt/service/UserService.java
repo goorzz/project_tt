@@ -35,10 +35,14 @@ public interface UserService {
     
 	
 	//Schedule 쿼리 list
-	List<ScheduleVO> getSchedule_date();
+	List<ScheduleVO> getSchedule_date(); // 경기일정만 뽑아옴(중복제외)
 	List<ScheduleVO> getSchedule(String date);
 	List<ScheduleVO> getSchedule_name(String name_1);
-
+	//승부예측용
+	List<ScheduleVO> getSchedule_predict(String date);	
+	List<ScheduleVO> getSchedule_predict2(String name_1);	
+	List<ScheduleVO> getSchedule_predict3(String date);	
+	List<ScheduleVO> getSchedule_predict4(String name_1);	
 	//news 쿼리 list
 	public List<NewsVO> getNews();
 

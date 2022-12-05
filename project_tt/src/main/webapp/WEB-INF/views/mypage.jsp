@@ -10,8 +10,8 @@
 </head>
 <body>
 <form id="form1" action="mypage" method="post">
-이름:<input type="text" name="user_id" value="${user.user_name}" readonly  style="border: none;">
-ID:<input type="text" name="user_name" value="${user.user_id}" readonly  style="border: none;"><br>
+이름:<input type="text" name="user_name" value="${user.user_name}" readonly  style="border: none;">
+ID:<input type="text" name="user_id" value="${user.user_id}" readonly  style="border: none;"><br>
 닉네임:<input type="text" name="user_nickname"id="user_nickname1" value="${user.user_nickname}">
  전화번호:<input type="text" name="user_tel"id="user_tel1" value="${user.user_tel}" ><br>
 비밀번호:<input type="password" name="user_pw" id="user_pw1"value="${user.user_pw}">
