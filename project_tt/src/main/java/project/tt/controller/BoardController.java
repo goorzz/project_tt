@@ -39,7 +39,9 @@ public class BoardController {
 		int total = service.getTotal(cri);
 		PageDTO  pagebar1 = new PageDTO(cri, total);
 		model.addAttribute("pagebar", pagebar1);
-	
+		if(cri.getPageNum()>pagebar1.getEndPage()) {
+			cri.setPageNum(pagebar1.getEndPage());
+		}
 	}
 	@GetMapping("/register")//글등록 화면열기
 	public void register() {

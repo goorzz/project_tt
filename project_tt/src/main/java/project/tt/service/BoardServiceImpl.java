@@ -70,5 +70,15 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> boardPaging(Criteria cri) {
 		return mapper1.boardPaging(cri);
 	}
+	//마이페이지 리스트
+	@Override
+	public List<BoardVO> mypage_board(String user_nickname) {
+		return mapper1.mypage_board(user_nickname);
+	}
+
+	@Override
+	public int mypage_count(String user_nickname) {
+		return mapper1.mypage_count(user_nickname);
+	}
 
 }

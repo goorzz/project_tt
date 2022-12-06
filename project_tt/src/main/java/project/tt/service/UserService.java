@@ -4,6 +4,7 @@ import java.util.List;
 
 import project.tt.vo.GroupVO;
 import project.tt.vo.NewsVO;
+import project.tt.vo.PointVO;
 import project.tt.vo.ScheduleVO;
 import project.tt.vo.UserVO;
 
@@ -45,5 +46,9 @@ public interface UserService {
 	List<ScheduleVO> getSchedule_predict4(String name_1);	
 	//news 쿼리 list
 	public List<NewsVO> getNews();
-
+	//포인트용
+	void point_login(String user_id);
+	List<PointVO> getPoint_list(String user_id);
+	void insertPoint_list(PointVO pvo);
+	UserVO getPoint(String user_id);
 }

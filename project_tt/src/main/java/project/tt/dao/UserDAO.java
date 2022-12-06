@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import project.tt.vo.GroupVO;
 import project.tt.vo.NewsVO;
+import project.tt.vo.PointVO;
 import project.tt.vo.ScheduleVO;
 import project.tt.vo.UserVO;
 
@@ -48,5 +49,9 @@ public interface UserDAO {
 	List<ScheduleVO> getSchedule_predict2(String name_1);
 	List<ScheduleVO> getSchedule_predict3(String date);
 	List<ScheduleVO> getSchedule_predict4(String name_1);
-	
+	//포인트 관련
+	void point_login(String user_id);
+	List<PointVO> getPoint_list(String user_id);
+	void insertPoint_list(PointVO vo);
+	UserVO getPoint(String user_id);
 }

@@ -12,8 +12,8 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	function test() {
-		var userId = document.getElementById("user_id1").value;
-		var userPwd = document.getElementById("user_pw1").value;
+		var userId = document.getElementById("user_id").value;
+		var userPwd = document.getElementById("user_pw").value;
     if(userId == "") {
         alert("아이디를 입력해주세요.");
         return false;
@@ -28,9 +28,9 @@
 
 	<c:if test="${empty user}">
 	<h1>메인화면 (login 전)</h1>
-		<form action="/login" method="post">
-			<input type="text" id ="user_id1"name="user_id" placeholder="아이디"><br>
-			<input type="password" id ="user_pw1"name="user_pw" placeholder="비밀번호"><br>
+		<form action="/login?point_no=2" method="post">
+			<input type="text" id ="user_id" name="user_id" placeholder="아이디"><br>
+			<input type="password" id ="user_pw" name="user_pw" placeholder="비밀번호"><br>
 			<input type="submit" onclick="test()" value="로그인">
 		</form> <br><br>
 		 	<input type="button" value="회원가입" onclick="location.href='/membership'" style="width: 125px; height: 56px">
@@ -40,8 +40,8 @@
 	<h1>메인화면 (login 후)</h1>
  		${user.user_nickname}님
  		<a href="logout">로그아웃</a> <br>	
- 		보유 포인트 : ${user.user_point} <br>
- 		<a href="mypagentry">마이페이지</a>	<br>
+ 		보유 포인트 : ${point.user_point} <br>
+ 		<a href="/mypage/mypagentry">마이페이지</a>	<br>
  	</c:if>		
  		<input type="button" value="게시판" onclick="location.href='/board/list'" style="width: 125px; height: 56px">
  		<input type="button" value="승부예측" onclick="location.href='/toto/tmain?date=${s_date}'" style="width: 125px; height: 56px">
@@ -50,7 +50,7 @@
 
  	<div class="table.type07"></div>
 	<table>
-    <h1>조별 순위 보기</h1>
+    <h1>조별 순위 보기</h1> 
 		<!-- 월드컵 조별 보여주기 -->
 		
     	<c:forEach items="${g_list}" var="g_list" >

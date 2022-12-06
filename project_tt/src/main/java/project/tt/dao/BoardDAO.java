@@ -43,4 +43,10 @@ public interface BoardDAO {
 	//게시판 목록을 페이지 적용
 	public List<BoardVO> boardPaging(Criteria cri);
 	
+	//마이페이지 내가쓴글 확인
+	public List<BoardVO> mypage_board(String user_nickname);
+	
+	// 마이페이지 내가 쓴글 갯수
+	public int mypage_count(String user_nickname);
+	
 }

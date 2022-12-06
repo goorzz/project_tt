@@ -32,6 +32,9 @@ public interface BoardService {
 		public int getTotal(Criteria cri);
 		// 게시판 페이징처리
 		List<BoardVO> boardPaging(Criteria cri);
-		
+		//  마이페이지 내가 쓴글 확인 
+		List<BoardVO> mypage_board(String user_nickname);
+		// 마이페이지 내가 쓴글 갯수
+		int mypage_count(String user_nickname);	
 
 }

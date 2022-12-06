@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import project.tt.service.UserService;
 import project.tt.vo.GroupVO;
@@ -25,7 +26,7 @@ public class MainController {
 	private UserService service;
 	
 	@RequestMapping("/")
-	public String main(Model model)  {
+	public String main(Model model,@RequestParam(value="user_id", required=false) String user_id)  {
 	
 		ArrayList<String> grouplist = new ArrayList<>(Arrays.asList("A조","B조","C조","D조","E조","F조","G조","H조"));
       
@@ -38,7 +39,8 @@ public class MainController {
         model.addAttribute("schedule", service.getSchedule(today));
         model.addAttribute("s_date", service.getSchedule(today).get(0).getDate());
         model.addAttribute("news", service.getNews());
- 
+        model.addAttribute("point",service.getPoint(user_id));
+//        System.out.println(service.getPoint(user_id));
         return "main";
 	}
 	@RequestMapping("/main1")

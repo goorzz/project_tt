@@ -107,4 +107,27 @@
 		select * from tt_predict_roundover16 where name_1=#{name_1} or name_2=#{name_1}
 	</select>	
 	
+	<!--포인트용 -->
+	<update id="point_login"> <!-- 로그인 시 포인트 추가 -->
+		update tt_login set user_point=(select* from (select user_point+(select point_point from tt_point where point_no='2') 
+		from tt_login where user_id=#{user_id}) as a) where user_id=#{user_id};	 
+	</update>
+	
+	<select id="getPoint" resultType="project.tt.vo.UserVO"> <!-- 회원별 포인트 가져오기 -->
+		select user_point from tt_login where user_id=#{user_id}
+	</select>	
+	
+	<select id="getPoint_list" resultType="project.tt.vo.PointVO"> <!-- 포인트 획득내역 가져오기 -->
+		select * from tt_point_info where user_id=#{user_id}
+	</select>	
+	
+	<insert id="insertPoint_list"	> <!-- 포인트 획득내역 추가 -->
+		insert into tt_point_info(user_id,point_content,point_point) values
+		((select * from (select user_id from tt_login where user_id=#{user_id}) as a), 
+		(select * from (select point_content from tt_point where point_no=#{point_no})as b), 
+		(select * from (select point_point from tt_point where point_no=#{point_no})as c));
+	</insert>
+	
+
+	
 </mapper>	

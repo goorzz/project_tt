@@ -11,9 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import project.tt.service.UserService;
+import project.tt.vo.PointVO;
 import project.tt.vo.UserVO;
 
 
@@ -125,11 +128,14 @@ public class MembershipController {
 		return "membership";
 	}
     
-	@PostMapping("/login") // 관우씨
-	public String loginsueecess(UserVO vo,HttpSession session,Model model) {    	
+	@RequestMapping("/login") // 관우씨
+	public String loginsueecess(PointVO pvo,UserVO vo,HttpSession session,Model model, RedirectAttributes re) {  
+		re.addAttribute("user_id",vo.getUser_id());
 		UserVO user = service.loginidpw(vo);
 		if(user!=null) {
-			session.setAttribute("user", user);
+			session.setAttribute("user", user);	
+			service.point_login(vo.getUser_id());
+			service.insertPoint_list(pvo);
 			return "redirect:/";		
 		}else {		
 			return "redirect:/";
@@ -142,43 +148,6 @@ public class MembershipController {
     	return"redirect:/";
     }
 	
-	@GetMapping("/mypagentry")//비밀번호 재인증
-	void mypagentry() {  
-		 
-	}
-	    
-	@PostMapping("/mypagentry")//비밀번호 재인증
-	public String pw(UserVO uservo) {
-		UserVO user = service.pw(uservo);
-		if(user!=null) {    		
-			return "redirect:mypage";	    		
-		}else {			
-			return "redirect:mypagentry";
-		}
-    }
-	    
-	@GetMapping("/mypage")//수정
-	void mypage() {   
-		 
-	}
-	 
-	@PostMapping("/mypage")//수정
-	String mypage1(UserVO uservo,HttpSession session) {
-		service.modify(uservo);  
-		session.removeAttribute("user");
-		return "redirect:/";
-	}
-	  
-	@GetMapping("/deletem")//탈퇴
-	void deletem() {
-		  
-	}
-	  
-	@PostMapping("/deletem")//탈퇴
-	String deletem1(UserVO uservo,HttpSession session) {
-		service.delete(uservo);
-		session.removeAttribute("user");
-		return "redirect:/";
-	}
+
 }	
 	
