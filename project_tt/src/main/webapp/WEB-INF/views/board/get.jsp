@@ -54,7 +54,8 @@
 <c:forEach items ="${replylist}" var="reply"><br>
 	<form action="reply_modify" method="post">
 		댓글번호 :<input type="text" name="no" value="${reply.no}"><br>
-		닉네임 :<input type="text" name="user_nickname" value="${reply.user_nickname}"><br>
+		닉네임 :${user.user_nickname}<br>
+		<input type="hidden" name="user_nickname" value="${user.user_nickname}">
 		댓글내용 : <input type="text" name= "reply_content" value="${reply.reply_content}">	<br>	
 		입력날짜 : <input type="text" name="reply_date" value="${reply.reply_date}"><br>
 				 <input type="hidden" name="rno" value="${reply.rno }">
@@ -69,7 +70,7 @@
 	<c:forEach items ="${replylist}" var="reply"><br>
 	<form action="reply_delete" method="post">
 		<input type="hidden" value="${reply.rno}" name="rno">
-		<input type="hidden" value="${reply.user_nickname}" name="user_nickname">
+		<input type="hidden" name="user_nickname" value="${user.user_nickname}">
 		<input type="hidden" value="${reply.reply_content}" name="reply_content">
 		<input type="hidden" value="${reply.reply_date}" name="reply_date">
 		<input type="hidden" value="${reply.bno}" name="bno">
@@ -80,7 +81,8 @@
  		<!--  -->
  			<form action="get" method="post">
  				<input type="hidden" name="bno"value="${board.bno} ">
-				닉네임:<input type ="text" name="user_nickname" placeholder="작성자를 입력해주세요."style="width:500px;font-size:10px;"><br>
+				닉네임:${user.user_nickname}<br>
+				<input type="hidden" name="user_nickname" value="${user.user_nickname}">
  				댓글내용:<textarea name="reply_content" placeholder="댓글을 입력해주세요." class="form-control form-control-user" rows ="1" cols="30" ></textarea>
  				<input type="hidden" name="reply_date" value="${datenow}">
  				<input type="submit" value="댓글등록">

@@ -97,7 +97,7 @@
 	</select>
 		<!-- 마이페이지 내가쓴글 보기 -->
 	<select id="mypage_board" resultType="project.tt.vo.BoardVO">
-		select @rownum:=@rownum+1 as rno, title,view_count,date from tt_board where user_nickname=#{user_nickname} and (@rownum:=0)=0 order by rno desc, date
+		select @rownum:=@rownum+1 as rno, bno, title,view_count,date from tt_board where user_nickname=#{user_nickname} and (@rownum:=0)=0 order by rno desc, date
 	</select>
 	<!-- 마이페이지 카운트 갯수 -->
 	<select id="mypage_count" resultType="project.tt.vo.BoardVO" >

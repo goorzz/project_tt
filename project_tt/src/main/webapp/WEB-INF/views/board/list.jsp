@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1> 월드컵 자유게시판  </h1>
-<button onclick="location.href = 'register'">글작성</button>
+<button onclick="location.href = 'register?user_nickname=${user.user_nickname}'">글작성</button>
 <form action="/board/list" method="get">
 	<select name= 'type'>
 		<option value="T">제목</option>
@@ -46,7 +46,7 @@
                                         <c:forEach items="${list}" var="board">
                                         <tr>
                                             <td><c:out value="${board.bno}"></c:out></td>
-                                            <td><a href="get?bno=${board.bno}"><c:out value="${board.title}"></c:out></a></td>
+                                            <td><a href="get?bno=${board.bno} & user_nickname=${user.user_nickname}"><c:out value="${board.title}"></c:out></a></td>
                                             <td><c:out value="${board.user_nickname}"></c:out></td>
                     						<td><fmt:formatDate pattern="yyyy/MM/dd hh:mm:ss" value="${board.date}"/></td> 
                                           	<td><c:out value="${board.good}"></c:out></td>
@@ -79,30 +79,36 @@
 						<li class="paginate_button page-item next ${pagebar.next ? '': 'disabled'}" id="dataTable_next"><a href="list?pageNum=${pagebar.cri.pageNum+1}&amount=${pagebar.cri.amount}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
 				
 					</ul>				
-					<%-- <c:if test="${pagebar.prev}">
-					<li class="paginate_button previous">
-						<a href="${pagebar.startPage -1}">previous</a>
-					</li>
+					<script>
+	<%-- 모달창 만드는 부분  --%>
+	//글 등록번호 알려주는 모달창
+	var bno="${bno}"; 
+	var removeis="${removeis}";  
+	var modifyis="${modifyis}"; 
+	
 
-					</c:if>
-					
-					<c:forEach var="num" begin="${pagebar.startPage}" end="${pagebar.endPage}">
-						<li class="paginate_button ${pagebar.cri.pageNum == num ?"active":""} ">
-							<a href="${num}">${num}</a>
-						</li>
-					</c:forEach>
-					
-					<c:if test="${pagebar.next}">
-					<li class="paginate_button previous">
-						<a href="${pagebar.endPage +1}">Next</a>
-					</li>
-					</c:if>
-					
-					<form id= 'actionForm' action="/board/list" mthod='get'>
-					<input type = "hidden" name="pageNum" value="${pagebar.cri.pageNum}">
-					<input type = "hidden" name="amount" value="${pagebar.cri.amount}">
-					</form>  --%>
-					
+	
+	console.log("작성된 글번호"+bno);
+	
+	if(!history.state){ 
+	    //경고창 필요없다는 표시
+		history.replaceState({},null,null);  //표시하기               
+		
+		if(bno){ //이것은 의미는 bno 값이 있다면
+			alert(bno+"번 글이 등록되었습니다.")
+		}else if(removeis){
+			if(removeis==="true")
+				alert("");
+			else
+				alert(" 삭제 되었습니다.");
+		}else if(modifyis){
+			if(modifyis==="true")
+				alert("수정 되었습니다.");
+			else
+				alert("수정중 오류가 났습니다.")
+		}
+	}
+	</script>
 
 	
 </body>

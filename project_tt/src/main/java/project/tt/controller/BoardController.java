@@ -19,6 +19,7 @@ import project.tt.service.BoardService;
 import project.tt.service.ReplyService;
 import project.tt.vo.BoardVO;
 import project.tt.vo.ReplyVO;
+import project.tt.vo.UserVO;
 
 @RequestMapping("/board")
 @Controller
@@ -62,9 +63,11 @@ public class BoardController {
 	}
 	
 	@PostMapping("/register") //등록 처리후 자동으로 목록보기 보여주기
-	public String register(BoardVO boardVO, RedirectAttributes rttr) {
+	public String register(BoardVO boardVO, RedirectAttributes rttr,UserVO uvo ,Model model) {
 	service.register(boardVO);
 	rttr.addFlashAttribute("bno",boardVO.getBno());
+	model.addAttribute("Mypage",service.mypage_board(uvo.getUser_nickname()));
+	System.out.println(uvo.getUser_nickname());
 	return"redirect:/board/list"; 
 	}
 	
@@ -105,8 +108,8 @@ public class BoardController {
 	
 	//댓글 등록하기
 	@PostMapping("/get")
-	public String reply_register(ReplyVO replyVO ,RedirectAttributes rttr) {
-		
+	public String reply_register(ReplyVO replyVO ,RedirectAttributes rttr,UserVO uvo ,Model model) {
+		model.addAttribute("Mypage",service.mypage_board(uvo.getUser_nickname()));
 		reply_service.reply_register(replyVO);
 		rttr.addFlashAttribute("reply",replyVO.getBno());
 		return"redirect:/board/get?bno="+replyVO.getBno();

@@ -10,25 +10,25 @@
 </head>
 <body>
 <h1>내 게시글 목록</h1>
-<table class="table table-bordered" border="1">
-	<thead>
-		<tr>
-			<th>글번호</th>
-			<th>글제목</th>
-			<th>조회수</th>
-			<th>작성일</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
+<table class="table table-bordered" border="1" >
+<thead>
+	<tr>
+		<td>글번호</td>
+		<td>글제목</td>
+		<td>조회수</td>
+		<td>작성일</td>
+	</tr>
+</thead>
+<tbody>
 		<c:forEach items="${Mypage_board_list}" var="blist" >
-			<td><c:out value="${blist.rno}"></c:out></td>
-			<td><c:out value="${blist.title}"></c:out></td>
-			<td><c:out value="${blist.view_count}"></c:out></td>
-			<td><fmt:formatDate pattern="yyyy/MM/dd hh:mm:ss" value="${blist.date}"/></td>
-		</c:forEach>
+		<tr>
+			<td> ${blist.rno}</td>
+			<td> <a href="/board/get?bno=${blist.bno}">${blist.title}</a></td>
+			<td> ${blist.view_count}</td>
+			<td ><fmt:formatDate pattern="yyyy/MM/dd hh:mm:ss" value="${blist.date}"/></td>
 		</tr>
-	</tbody>
+		</c:forEach>
+</tbody>
 </table>
 </body>
 </html>
