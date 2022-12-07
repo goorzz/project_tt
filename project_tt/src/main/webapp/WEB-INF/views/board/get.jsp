@@ -78,8 +78,8 @@
 	</c:forEach>	
 
  		<br>
- 		<!--  -->
- 			<form action="get" method="post">
+ 		<!--댓글 등록 -->
+ 			<form action="get?user_id=${user.user_id}&point_no=5" method="post">
  				<input type="hidden" name="bno"value="${board.bno} ">
 				닉네임:${user.user_nickname}<br>
 				<input type="hidden" name="user_nickname" value="${user.user_nickname}">

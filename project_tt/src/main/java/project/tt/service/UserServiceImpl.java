@@ -1,7 +1,5 @@
 package project.tt.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,13 +130,21 @@ public class UserServiceImpl implements UserService {
 	public List<ScheduleVO> getSchedule_predict4(String name_1) {
 		return dao.getSchedule_predict4(name_1);
 	}
-	
 	//	포인트용
 	@Override //로그인
 	public void point_login(String user_id) {
 		dao.point_login(user_id);
 	}
-
+	@Override //글작성
+	public void point_write(String user_id) {
+		dao.point_write(user_id);
+		
+	}
+	@Override //댓글작성
+	public void point_reply(String user_id) {
+		dao.point_reply(user_id);
+		
+	}
 	@Override // 포인트 획득내역
 	public List<PointVO> getPoint_list(String user_id) {
 		return dao.getPoint_list(user_id);
@@ -154,4 +160,6 @@ public class UserServiceImpl implements UserService {
 	public UserVO getPoint(String user_id) {
 		return dao.getPoint(user_id);
 	}
+
+
 }

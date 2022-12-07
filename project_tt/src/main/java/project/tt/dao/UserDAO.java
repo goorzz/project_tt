@@ -51,6 +51,8 @@ public interface UserDAO {
 	List<ScheduleVO> getSchedule_predict4(String name_1);
 	//포인트 관련
 	void point_login(String user_id);
+	void point_write(String user_id);
+	void point_reply(String user_id);
 	List<PointVO> getPoint_list(String user_id);
 	void insertPoint_list(PointVO vo);
 	UserVO getPoint(String user_id);

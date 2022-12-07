@@ -17,7 +17,9 @@ import project.tt.dao.Criteria;
 import project.tt.dao.PageDTO;
 import project.tt.service.BoardService;
 import project.tt.service.ReplyService;
+import project.tt.service.UserService;
 import project.tt.vo.BoardVO;
+import project.tt.vo.PointVO;
 import project.tt.vo.ReplyVO;
 import project.tt.vo.UserVO;
 
@@ -29,7 +31,8 @@ public class BoardController {
 //	@Autowired
 	private BoardService service;
 	private ReplyService reply_service;
-		
+	private UserService point_service; 	
+	
 	@GetMapping("/list") //게시글 목록보기 /list.jsp
 	public void List(Model model ,Criteria cri) {
 		if(cri.getPageNum()==0) {
@@ -63,11 +66,13 @@ public class BoardController {
 	}
 	
 	@PostMapping("/register") //등록 처리후 자동으로 목록보기 보여주기
-	public String register(BoardVO boardVO, RedirectAttributes rttr,UserVO uvo ,Model model) {
+	public String register(BoardVO boardVO, RedirectAttributes rttr,UserVO uvo ,Model model, PointVO pvo) {
+	point_service.point_write(pvo.getUser_id());
+	point_service.insertPoint_list(pvo);
 	service.register(boardVO);
 	rttr.addFlashAttribute("bno",boardVO.getBno());
 	model.addAttribute("Mypage",service.mypage_board(uvo.getUser_nickname()));
-	System.out.println(uvo.getUser_nickname());
+	
 	return"redirect:/board/list"; 
 	}
 	
@@ -108,7 +113,9 @@ public class BoardController {
 	
 	//댓글 등록하기
 	@PostMapping("/get")
-	public String reply_register(ReplyVO replyVO ,RedirectAttributes rttr,UserVO uvo ,Model model) {
+	public String reply_register(ReplyVO replyVO ,RedirectAttributes rttr,UserVO uvo ,Model model, PointVO pvo) {
+		point_service.point_reply(pvo.getUser_id());
+		point_service.insertPoint_list(pvo);
 		model.addAttribute("Mypage",service.mypage_board(uvo.getUser_nickname()));
 		reply_service.reply_register(replyVO);
 		rttr.addFlashAttribute("reply",replyVO.getBno());

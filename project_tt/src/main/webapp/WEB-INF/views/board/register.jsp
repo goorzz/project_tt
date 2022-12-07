@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/board/register" method="post">
+	<form action="/board/register?user_id=${user.user_id}&point_no=4" method="post">
 		<fieldset>
 			<legend> <h1>자유게시판글 등록하기 </h1></legend>
 			제목 :<input type ="text" name ="title" placeholder="제목을 입력해주세요."style="width:500px;font-size:10px;"><br>

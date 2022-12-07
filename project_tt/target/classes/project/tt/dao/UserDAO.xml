@@ -110,7 +110,17 @@
 	<!--포인트용 -->
 	<update id="point_login"> <!-- 로그인 시 포인트 추가 -->
 		update tt_login set user_point=(select* from (select user_point+(select point_point from tt_point where point_no='2') 
-		from tt_login where user_id=#{user_id}) as a) where user_id=#{user_id};	 
+		from tt_login where user_id=#{user_id}) as a) where user_id=#{user_id}	 
+	</update>
+	
+	<update id="point_write"> <!-- 글 작성시 포인트 추가 -->
+		update tt_login set user_point=(select* from (select user_point+(select point_point from tt_point where point_no='4') 
+		from tt_login where user_id=#{user_id}) as a) where user_id=#{user_id} 
+	</update>
+	
+	<update id="point_reply"> <!-- 댓글 작성시 포인트 추가 -->
+		update tt_login set user_point=(select* from (select user_point+(select point_point from tt_point where point_no='5') 
+		from tt_login where user_id=#{user_id}) as a) where user_id=#{user_id} 
 	</update>
 	
 	<select id="getPoint" resultType="project.tt.vo.UserVO"> <!-- 회원별 포인트 가져오기 -->
@@ -121,7 +131,7 @@
 		select * from tt_point_info where user_id=#{user_id}
 	</select>	
 	
-	<insert id="insertPoint_list"	> <!-- 포인트 획득내역 추가 -->
+	<insert id="insertPoint_list"> <!-- 포인트 획득내역 추가 -->
 		insert into tt_point_info(user_id,point_content,point_point) values
 		((select * from (select user_id from tt_login where user_id=#{user_id}) as a), 
 		(select * from (select point_content from tt_point where point_no=#{point_no})as b), 
