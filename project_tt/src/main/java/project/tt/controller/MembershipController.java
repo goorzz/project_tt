@@ -2,6 +2,8 @@ package project.tt.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +27,10 @@ public class MembershipController {
 	
 	@Autowired
 	private UserService service;
+	
+    LocalDate now = LocalDate.now();   // 현재 날짜 구하기
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");   // 포맷 정의
+    String today = now.format(format); // 포맷 적용 
 	
 	@RequestMapping("/membership")
 	public void main(UserVO vo, Model model) {
@@ -129,14 +135,18 @@ public class MembershipController {
 	}
     
 	@RequestMapping("/login") // 관우씨
-	public String loginsueecess(PointVO pvo,UserVO vo,HttpSession session,Model model, RedirectAttributes re) {  
-		re.addAttribute("user_id",vo.getUser_id());
-		UserVO user = service.loginidpw(vo);
+	public String loginsueecess(PointVO pvo,UserVO vo,HttpSession session,Model model, RedirectAttributes re) {	
+		re.addAttribute("user_id",vo.getUser_id());	
+		UserVO user = service.loginidpw(vo);	
 		if(user!=null) {
 			session.setAttribute("user", user);	
-			service.point_login(vo.getUser_id());
-			service.insertPoint_list(pvo);
-			return "redirect:/";		
+			if(service.login_check(vo.getUser_id(), today).size()==0) {
+				service.point_login(vo.getUser_id());
+				service.insertPoint_list(pvo);
+				return "redirect:/";
+			}else {
+				return "redirect:/";	
+			}				
 		}else {		
 			return "redirect:/";
 	    }

@@ -135,31 +135,37 @@ public class UserServiceImpl implements UserService {
 	public void point_login(String user_id) {
 		dao.point_login(user_id);
 	}
+	@Override
+	public List<PointVO> login_check(String user_id, String date) {
+		return dao.login_check(user_id, date);
+	}
 	@Override //글작성
 	public void point_write(String user_id) {
 		dao.point_write(user_id);
-		
+	}
+	@Override
+	public List<PointVO> write_check(String user_id, String date) {
+		return dao.write_check(user_id, date);
 	}
 	@Override //댓글작성
 	public void point_reply(String user_id) {
 		dao.point_reply(user_id);
-		
+	}
+	@Override
+	public List<PointVO> reply_check(String user_id, String date) {
+		return dao.reply_check(user_id, date);
 	}
 	@Override // 포인트 획득내역
 	public List<PointVO> getPoint_list(String user_id) {
 		return dao.getPoint_list(user_id);
 	}
-
 	@Override
 	public void insertPoint_list(PointVO pvo) {
 		dao.insertPoint_list(pvo);
-		
 	}
-
 	@Override
 	public UserVO getPoint(String user_id) {
 		return dao.getPoint(user_id);
 	}
-
 
 }

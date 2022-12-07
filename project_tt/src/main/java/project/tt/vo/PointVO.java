@@ -5,6 +5,7 @@ import java.util.Date;
 public class PointVO {
 
 	private int point_no; //포인트 번호 
+	private int no;
 	private String user_id;
 	private String point_content;// 포인트내용
 	private int point_point;// 포인트
@@ -39,6 +40,12 @@ public class PointVO {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
 	}
 
 }

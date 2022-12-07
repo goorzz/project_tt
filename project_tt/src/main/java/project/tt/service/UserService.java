@@ -48,8 +48,11 @@ public interface UserService {
 	public List<NewsVO> getNews();
 	//포인트용
 	void point_login(String user_id);
+	List<PointVO> login_check(String user_id, String date);
 	void point_write(String user_id);
+	List<PointVO> write_check(String user_id, String date);
 	void point_reply(String user_id);
+	List<PointVO> reply_check(String user_id, String date);
 	List<PointVO> getPoint_list(String user_id);
 	void insertPoint_list(PointVO pvo);
 	UserVO getPoint(String user_id);
