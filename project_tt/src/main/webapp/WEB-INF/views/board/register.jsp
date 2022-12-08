@@ -14,9 +14,9 @@
 			닉네임:${user.user_nickname}<br>
 			<input type="hidden" name="user_nickname" value="${user.user_nickname}">
 			<label>내용:<textarea name="content" class="form-control form-control-user" rows ="30" cols="100" >${board.content}</textarea></label> <br><hr>
-			
 			<input type ="submit" value="작성">
 			<input type ="reset" value="취소">
+			<input type="button" value="게시판으로" onclick="location.href='/board/list'"/>
 		</fieldset>
 	</form>
 </body>
