@@ -29,6 +29,7 @@ public interface UserService {
 	public UserVO pw(UserVO uservo);//비밀번호 확인
 	public void modify(UserVO uservo);//회원 수정
 	public void delete(UserVO uservo);//회원 탈퇴
+	void delete_point(String user_id); // 탈퇴시 포인트내역삭제
 	
 	//조별리그 쿼리 list
     public List<GroupVO> getGroup_main();
@@ -47,6 +48,7 @@ public interface UserService {
 	//news 쿼리 list
 	public List<NewsVO> getNews();
 	//포인트용
+	void point_join(String user_id);
 	void point_login(String user_id);
 	List<PointVO> login_check(String user_id, String date);
 	void point_write(String user_id);

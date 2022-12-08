@@ -37,7 +37,7 @@ public class MembershipController {
 		model.addAttribute("list",service.getUser());						
 	}
 	@RequestMapping("/register")
-	public String membership(UserVO vo, Model model) throws IOException {
+	public String membership(UserVO vo, PointVO pvo, Model model) throws IOException {
 		if(vo.getUser_id() == "") {
 			model.addAttribute("text","아이디를 입력해주세요.");
 			return "membership";
@@ -64,6 +64,8 @@ public class MembershipController {
 			return "membership";			
 		}else {
 			service.register(vo);
+			service.point_join(pvo.getUser_id());
+			service.insertPoint_list(pvo);	
 			return "register";
 		}		
 	}	

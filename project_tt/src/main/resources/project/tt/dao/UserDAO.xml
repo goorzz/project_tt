@@ -54,9 +54,12 @@
 	
 	<!-- 회원삭제 -->
 	<delete id="delete">
-	delete from tt_login where user_id=#{user_id} and user_name=#{user_name}	
+		delete from tt_login where user_id=#{user_id} and user_name=#{user_name}	
 	</delete>
 	
+	<delete id='delete_point'>
+		DELETE from tt_point_info where user_id=#{user_id}
+	</delete>
 	<!-- 비밀번호확인 -->
 	<select id="pw" resultType="project.tt.vo.UserVO"> 
 		select * from tt_login where user_id=#{user_id} and user_pw=#{user_pw}
@@ -108,7 +111,11 @@
 	</select>	
 	
 	<!--포인트용 -->
-	<update id="point_login"> <!-- 로그인 시 포인트 추가 -->
+	<update id="point_join"> <!-- 회원가입시 포인트 추가 -->
+		update tt_login set user_point=(select* from (select user_point+(select point_point from tt_point where point_no='1') 
+		from tt_login where user_id=#{user_id}) as a) where user_id=#{user_id}	 
+	</update>
+	<update id="point_login"> <!-- 로그인시 포인트 추가 -->
 		update tt_login set user_point=(select* from (select user_point+(select point_point from tt_point where point_no='2') 
 		from tt_login where user_id=#{user_id}) as a) where user_id=#{user_id}	 
 	</update>

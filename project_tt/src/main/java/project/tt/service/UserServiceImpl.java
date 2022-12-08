@@ -75,6 +75,11 @@ public class UserServiceImpl implements UserService {
 		dao.delete(uservo);
 		
 	}
+	@Override//탈퇴시 포인트삭제
+	public void delete_point(String user_id) {
+		dao.delete_point(user_id);
+		
+	}
 
 	@Override//비밀번호 확인
 	public UserVO pw(UserVO uservo) {		
@@ -131,6 +136,10 @@ public class UserServiceImpl implements UserService {
 		return dao.getSchedule_predict4(name_1);
 	}
 	//	포인트용
+	@Override //회원가입
+	public void point_join(String user_id) {
+		dao.point_join(user_id);
+	}
 	@Override //로그인
 	public void point_login(String user_id) {
 		dao.point_login(user_id);

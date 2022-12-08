@@ -69,8 +69,9 @@ public class MypageController {
 	} 
 	  
 	@RequestMapping("/deletem")//탈퇴
-	String deletem1(UserVO uservo,HttpSession session) {
-		service.delete(uservo);
+	String deletem1(UserVO uvo,HttpSession session) {
+		service.delete(uvo);
+		service.delete_point(uvo.getUser_id());
 		session.removeAttribute("user");
 		return "redirect:/";
 	}

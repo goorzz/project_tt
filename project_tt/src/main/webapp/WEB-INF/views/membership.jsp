@@ -51,7 +51,7 @@
     }
 	</script>
 <!-- 입력창 -->
-	<form action="/register" method="get" onsubmit="return loacte1()">
+	<form action="/register?point_no=1" method="post" onsubmit="return loacte1()">
 		아이디 <br> <input name='user_id' id='user_id1'type='text' value="${id}"/>
 			<input type="submit" value="중복확인" onclick="locate2(this.form)"> ${check} <br>
 		비밀번호 (8자리 이상, 숫자/대문자/소문자/특수문자 모두 포함) <br><input name='user_pw' type='text' id='user_pw1' value="${pw}" /> <br>

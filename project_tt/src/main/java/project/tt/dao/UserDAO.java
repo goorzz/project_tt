@@ -32,6 +32,7 @@ public interface UserDAO {
 	public UserVO pw(UserVO uservo);//비밀번호 확인
 	int modify(UserVO uservo);//회원 수정
 	int delete(UserVO uservo);//회원 탈퇴
+	void delete_point(String user_id); // 탈퇴시 포인트내역삭제
 	
 	//조별 경기 가져오기
 	List<GroupVO> getGroup_main();
@@ -50,6 +51,7 @@ public interface UserDAO {
 	List<ScheduleVO> getSchedule_predict3(String date);
 	List<ScheduleVO> getSchedule_predict4(String name_1);
 	//포인트 관련
+	void point_join(String user_id);
 	void point_login(String user_id);
 	List<PointVO> login_check(@Param("user_id") String user_id, @Param("date") String date);
 	void point_write(String user_id);
