@@ -65,6 +65,8 @@
 			</li>
          </c:otherwise>
     </c:choose>
+    
+    <input type="button" value="메인 이동" onclick="location.href='/'" style="WIDTH: 160pt; HEIGHT: 30pt"/>
 	
 </ul>	
 </body>

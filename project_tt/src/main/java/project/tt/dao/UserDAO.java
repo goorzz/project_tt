@@ -8,6 +8,7 @@ import project.tt.vo.GroupVO;
 import project.tt.vo.NewsVO;
 import project.tt.vo.PointVO;
 import project.tt.vo.ScheduleVO;
+import project.tt.vo.TotoVO;
 import project.tt.vo.UserVO;
 
 
@@ -46,10 +47,9 @@ public interface UserDAO {
 	List<ScheduleVO> getSchedule_date();
 	List<ScheduleVO> getSchedule_name(String name_1);
 	//예측결과 포함 일정
-	List<ScheduleVO> getSchedule_predict(String date);
-	List<ScheduleVO> getSchedule_predict2(String name_1);
-	List<ScheduleVO> getSchedule_predict3(String date);
-	List<ScheduleVO> getSchedule_predict4(String name_1);
+	List<ScheduleVO> getSchedule_predict16(String date);
+	List<ScheduleVO> getSchedule_date16();
+	List<ScheduleVO> getMatch16(TotoVO tvo);
 	//포인트 관련
 	void point_join(String user_id);
 	void point_login(String user_id);
@@ -58,10 +58,16 @@ public interface UserDAO {
 	List<PointVO> write_check(@Param("user_id") String user_id, @Param("date") String date);
 	void point_reply(String user_id);
 	List<PointVO> reply_check(@Param("user_id") String user_id, @Param("date") String date);
+	void point_toto(String user_id);
 	List<PointVO> getPoint_list(String user_id);
-	void insertPoint_list(PointVO vo);
-	UserVO getPoint(String user_id);
-	
+	void insertPoint_list(PointVO pvo);
+	void insertPoint_list(TotoVO tvo);
+	Integer getPoint(String user_id);
+	//토토용
+	void insertToto_list(TotoVO tvo);
+	List<TotoVO> getToto_list(String user_id);
+	List<TotoVO> toto_check(TotoVO tvo);
+	//페이징용
 	int getTotal(Criteria cri);
 	List<PointVO> pointPaging(Criteria cri);
 }

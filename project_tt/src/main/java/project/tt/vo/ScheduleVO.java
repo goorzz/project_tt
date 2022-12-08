@@ -2,7 +2,6 @@ package project.tt.vo;
 
 public class ScheduleVO {
 
-	
 	private int no;
 	private String p_no;
 	private String date;   	 // 경기날짜
@@ -13,7 +12,6 @@ public class ScheduleVO {
 	private String score_1;  // 팀1 점수 
 	private String score_2; 	 // 팀2 점수
 	private String predict; // 예측결과
-	
 	@Override
 	public String toString() {
 		return "ScheduleVO [no=" + no + ", p_no=" + p_no + ", date=" + date + ", w_group=" + w_group + ", time=" + time

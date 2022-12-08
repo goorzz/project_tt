@@ -68,9 +68,6 @@ public class MypageController {
 	@RequestMapping("/mypage_point")// 포인트획득 현황
 	void mypage_point(UserVO uvo,Model model,Criteria cri) { 
 		cri.set_skip();
-		System.out.println(cri.getUser_id());
-		System.out.println(cri.getSkip());
-		System.out.println(cri.getAmount());
 		model.addAttribute("list",service.pointPaging(cri));
 		int total = service.getTotal(cri);
 		
@@ -79,8 +76,7 @@ public class MypageController {
 		model.addAttribute("name",cri.getUser_id());
 		
 		model.addAttribute("point",service.getPoint(cri.getUser_id()));
-//		model.addAttribute("point",service.getPoint(uvo.getUser_id()));
-//		model.addAttribute("point_list",service.getPoint_list(uvo.getUser_id()));
+
 	} 
 	  
 	@RequestMapping("/deletem")//탈퇴

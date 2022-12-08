@@ -11,6 +11,7 @@ import project.tt.vo.GroupVO;
 import project.tt.vo.NewsVO;
 import project.tt.vo.PointVO;
 import project.tt.vo.ScheduleVO;
+import project.tt.vo.TotoVO;
 import project.tt.vo.UserVO;
 
 @Service
@@ -117,24 +118,18 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override // 스케쥴가져오기(승부예측용)
-	public List<ScheduleVO> getSchedule_predict(String date) {
-		return dao.getSchedule_predict(date);
+	public List<ScheduleVO> getSchedule_predict16(String date) {
+		return dao.getSchedule_predict16(date);
+	}
+	@Override // 스케쥴가져오기(메인)
+	public List<ScheduleVO> getSchedule_date16() {
+		return dao.getSchedule_date16();
+	}
+	@Override // 경기정보가져오기(승부예측용)
+	public List<ScheduleVO> getMatch16(TotoVO tvo) {
+		return dao.getMatch16(tvo);
 	}
 	
-	@Override // 스케쥴가져오기(승부예측용)
-	public List<ScheduleVO> getSchedule_predict2(String name_1) {
-		return dao.getSchedule_predict2(name_1);
-	}
-	
-	@Override // 스케쥴가져오기(승부예측용)
-	public List<ScheduleVO> getSchedule_predict3(String date) {
-		return dao.getSchedule_predict3(date);
-	}
-	
-	@Override // 스케쥴가져오기(승부예측용)
-	public List<ScheduleVO> getSchedule_predict4(String name_1) {
-		return dao.getSchedule_predict4(name_1);
-	}
 	//	포인트용
 	@Override //회원가입
 	public void point_join(String user_id) {
@@ -164,6 +159,10 @@ public class UserServiceImpl implements UserService {
 	public List<PointVO> reply_check(String user_id, String date) {
 		return dao.reply_check(user_id, date);
 	}
+	@Override //승부예측
+	public void point_toto(String user_id) {
+		dao.point_toto(user_id);
+	}
 	@Override // 포인트 획득내역
 	public List<PointVO> getPoint_list(String user_id) {
 		return dao.getPoint_list(user_id);
@@ -173,9 +172,29 @@ public class UserServiceImpl implements UserService {
 		dao.insertPoint_list(pvo);
 	}
 	@Override
-	public UserVO getPoint(String user_id) {
+	public void insertPoint_list(TotoVO tvo) {
+		dao.insertPoint_list(tvo);
+		
+	}
+
+	@Override
+	public Integer getPoint(String user_id) {
 		return dao.getPoint(user_id);
 	}
+	//토토용
+	@Override
+	public void insertToto_list(TotoVO tvo){
+		dao.insertToto_list(tvo);
+	}
+	@Override
+	public List<TotoVO> getToto_list(String user_id) {
+		return dao.getToto_list(user_id);
+	}
+	@Override
+	public List<TotoVO> toto_check(TotoVO tvo) {
+		return dao.toto_check(tvo);
+	}
+	
 	// 마이페이지(포인트)	
 	@Override
 	public int getTotal(Criteria cri) { // 게시물 총갯수
@@ -186,5 +205,6 @@ public class UserServiceImpl implements UserService {
 	public List<PointVO> pointPaging(Criteria cri) {
 		return dao.pointPaging(cri);
 	}
+
 
 }

@@ -25,11 +25,11 @@
 	<h1>메인화면 (login 후)</h1>
  		${user.user_nickname}님
  		<a href="logout">로그아웃</a> <br>	
- 		보유 포인트 : ${point.user_point} <br>
+ 		보유 포인트 : ${point} <br>
  		<a href="/mypage/mypagentry">마이페이지</a>	<br>
  	</c:if>		
  		<input type="button" value="게시판" onclick="location.href='/board/list'" style="width: 125px; height: 56px">
- 		<input type="button" value="승부예측" onclick="location.href='/toto/tmain?date=${s_date}'" style="width: 125px; height: 56px">
+ 		<input type="button" value="승부예측" onclick="location.href='/toto/t_main?user_id=${user.user_id}'" style="width: 125px; height: 56px">
 	 	
 
 

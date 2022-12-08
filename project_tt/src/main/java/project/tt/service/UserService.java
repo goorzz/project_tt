@@ -7,6 +7,7 @@ import project.tt.vo.GroupVO;
 import project.tt.vo.NewsVO;
 import project.tt.vo.PointVO;
 import project.tt.vo.ScheduleVO;
+import project.tt.vo.TotoVO;
 import project.tt.vo.UserVO;
 
 
@@ -42,10 +43,9 @@ public interface UserService {
 	List<ScheduleVO> getSchedule(String date);
 	List<ScheduleVO> getSchedule_name(String name_1);
 	//승부예측용
-	List<ScheduleVO> getSchedule_predict(String date);	
-	List<ScheduleVO> getSchedule_predict2(String name_1);	
-	List<ScheduleVO> getSchedule_predict3(String date);	
-	List<ScheduleVO> getSchedule_predict4(String name_1);	
+	List<ScheduleVO> getSchedule_date16();
+	List<ScheduleVO> getSchedule_predict16(String date);
+	List<ScheduleVO> getMatch16(TotoVO tvo);
 	//news 쿼리 list
 	public List<NewsVO> getNews();
 	//포인트용
@@ -56,10 +56,17 @@ public interface UserService {
 	List<PointVO> write_check(String user_id, String date);
 	void point_reply(String user_id);
 	List<PointVO> reply_check(String user_id, String date);
+	void point_toto(String user_id);
 	List<PointVO> getPoint_list(String user_id);
 	void insertPoint_list(PointVO pvo);
-	UserVO getPoint(String user_id);
-	
+	void insertPoint_list(TotoVO tvo);
+	Integer getPoint(String user_id);
+	//토토용
+	void insertToto_list(TotoVO tvo);
+	List<TotoVO> getToto_list(String user_id);
+	List<TotoVO> toto_check(TotoVO tvo);
+	//페이징용
 	int getTotal(Criteria cri);
 	List<PointVO> pointPaging(Criteria cri);
+	
 }
