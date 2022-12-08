@@ -86,6 +86,7 @@
 
  	
 <!--댓글 등록 -->
+<c:if test="${! empty user}">
 <form action="get?user_id=${user.user_id}&point_no=5" method="post">
 	<input type="hidden" name="bno"value="${board.bno} ">
 	닉네임:${user.user_nickname}<br>
@@ -95,7 +96,10 @@
 	<input type="submit" value="댓글등록">
 	<input type ="reset" value="취소">
 </form>
- 				
+</c:if> 
+<c:if test="${empty user}">		
+로그인 후 댓글작성이 가능합니다.
+</c:if>		
 </body>
 
 <script> 

@@ -2,6 +2,7 @@ package project.tt.service;
 
 import java.util.List;
 
+import project.tt.dao.Criteria;
 import project.tt.vo.GroupVO;
 import project.tt.vo.NewsVO;
 import project.tt.vo.PointVO;
@@ -58,4 +59,7 @@ public interface UserService {
 	List<PointVO> getPoint_list(String user_id);
 	void insertPoint_list(PointVO pvo);
 	UserVO getPoint(String user_id);
+	
+	int getTotal(Criteria cri);
+	List<PointVO> pointPaging(Criteria cri);
 }

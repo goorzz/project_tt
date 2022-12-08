@@ -10,6 +10,7 @@ public class Criteria {
 	private int skip=0; //  (현재페이지-1) * 한페이지당 게시물수 )
 	private String type; 	//   타입 
 	private String keyword; //검색어 키워드	
+	private String user_id;
 
 	public void set_skip() {
 		this.skip=(pageNum-1)*amount;

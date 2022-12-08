@@ -157,4 +157,15 @@
 		(select * from (select point_point from tt_point where point_no=#{point_no})as c));
 	</insert>
 	
+	<!-- 포인트획득목록 페이징하기 -->
+	<select id ="pointPaging" resultType="project.tt.vo.PointVO">
+			select * from(select * from tt_point_info where user_id=#{user_id}
+               order by no desc) as t1 
+          		 limit #{skip},#{amount}
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		select count(*) from tt_point_info where user_id=#{user_id}		
+	</select>
+	
 </mapper>	

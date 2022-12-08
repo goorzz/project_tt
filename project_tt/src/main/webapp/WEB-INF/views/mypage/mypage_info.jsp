@@ -13,7 +13,7 @@
 <table class="table table-bordered" border="1" >
 <thead>
 	<tr>
-		<td>글번호</td>
+		<td>번호</td>
 		<td>글제목</td>
 		<td>조회수</td>
 		<td>작성일</td>

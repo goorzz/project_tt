@@ -61,4 +61,7 @@ public interface UserDAO {
 	List<PointVO> getPoint_list(String user_id);
 	void insertPoint_list(PointVO vo);
 	UserVO getPoint(String user_id);
+	
+	int getTotal(Criteria cri);
+	List<PointVO> pointPaging(Criteria cri);
 }

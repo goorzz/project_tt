@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.AllArgsConstructor;
+import project.tt.dao.Criteria;
+import project.tt.dao.PageDTO;
 import project.tt.service.BoardService;
 import project.tt.service.ReplyService;
 import project.tt.service.UserService;
@@ -58,14 +60,27 @@ public class MypageController {
 	}
 	
 	@RequestMapping("/mypage_info")// 내 게시글 목록
-	void mypage_info(UserVO uvo,Model model) {   
+	void mypage_info(UserVO uvo,Model model) {  
+
 		model.addAttribute("Mypage_board_list",service_b.mypage_board(uvo.getUser_nickname()));
 	}		 
 	
 	@RequestMapping("/mypage_point")// 포인트획득 현황
-	void mypage_point(UserVO uvo,Model model) { 
-		model.addAttribute("point",service.getPoint(uvo.getUser_id()));
-		model.addAttribute("point_list",service.getPoint_list(uvo.getUser_id()));
+	void mypage_point(UserVO uvo,Model model,Criteria cri) { 
+		cri.set_skip();
+		System.out.println(cri.getUser_id());
+		System.out.println(cri.getSkip());
+		System.out.println(cri.getAmount());
+		model.addAttribute("list",service.pointPaging(cri));
+		int total = service.getTotal(cri);
+		
+		PageDTO  pagebar = new PageDTO(cri, total);
+		model.addAttribute("pagebar", pagebar);
+		model.addAttribute("name",cri.getUser_id());
+		
+		model.addAttribute("point",service.getPoint(cri.getUser_id()));
+//		model.addAttribute("point",service.getPoint(uvo.getUser_id()));
+//		model.addAttribute("point_list",service.getPoint_list(uvo.getUser_id()));
 	} 
 	  
 	@RequestMapping("/deletem")//탈퇴

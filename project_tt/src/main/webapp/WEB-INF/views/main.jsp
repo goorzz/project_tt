@@ -8,22 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<!-- 스크립트 -->
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-	function test() {
-		var userId = document.getElementById("user_id").value;
-		var userPwd = document.getElementById("user_pw").value;
-    if(userId == "") {
-        alert("아이디를 입력해주세요.");
-        return false;
-    }
-    else if(userPwd == "") {
-        alert("비밀번호를 입력해주세요.");
-        return false;
-    }
-}
-</script>
+
 <body>
 
 	<c:if test="${empty user}">
@@ -130,6 +115,21 @@
 		</c:forEach>
 	</table>
         <br>   		 
-  
+<!-- 스크립트 -->
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	function test() {
+		var userId = document.getElementById("user_id").value;
+		var userPwd = document.getElementById("user_pw").value;
+    if(userId == "") {
+        alert("아이디를 입력해주세요.");
+        return false;
+    }
+    else if(userPwd == "") {
+        alert("비밀번호를 입력해주세요.");
+        return false;
+    }
+}
+</script> 
 </body>
 </html>

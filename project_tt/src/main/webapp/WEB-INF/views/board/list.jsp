@@ -11,7 +11,9 @@
 </head>
 <body>
 <h1> 월드컵 자유게시판  </h1>
+<c:if test="${! empty user}">
 <button onclick="location.href = 'register?user_nickname=${user.user_nickname}'">글작성</button>
+</c:if>
 <input type="button" value="메인으로" onclick="location.href='/'"/>
 <form action="/board/list" method="get">
 	<select name= 'type'>
@@ -53,11 +55,15 @@
 	<td><c:out value="${board.good}"></c:out></td>
 	<td><form action ="good" method ="get">
 	<input type="hidden" name="bno" value="${board.bno} "> 
+	<input type="hidden" name="pageNum" value="${pageNum}"> 
+	<input type="hidden" name="amount" value="${amount} "> 
 	<button type ="submit">좋아요</button>
 	</form></td>
 	<td><c:out value="${board.bad}"></c:out></td>
 	<td><form action ="bad" method ="get">
 	<input type="hidden" name="bno" value="${board.bno} ">
+	<input type="hidden" name="pageNum" value="${pageNum}"> 
+	<input type="hidden" name="amount" value="${amount} "> 
 	<button type ="submit">싫어요</button>
 	</form></td>
 	<td><c:out value="${board.view_count}"></c:out></td> 
@@ -73,7 +79,8 @@
 	<li class="paginate_button page-item ${pagebar.cri.pageNum==num ? 'active': '' }"><a href="list?pageNum=${num}&amount=${pagebar.cri.amount}" class="page-link">${num}</a></li>
 	</c:forEach>
 <li class="paginate_button page-item next ${pagebar.next ? '': 'disabled'}" id="dataTable_next"><a href="list?pageNum=${pagebar.cri.pageNum+1}&amount=${pagebar.cri.amount}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li>
-</ul>				
+</ul>	
+<!-- 스크립트  -->			
 <script>
 <%-- 모달창 만드는 부분  --%>
 	//글 등록번호 알려주는 모달창

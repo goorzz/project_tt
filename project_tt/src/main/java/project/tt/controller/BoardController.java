@@ -47,6 +47,8 @@ public class BoardController {
 		if(cri.getPageNum()==0) {
 			cri.setPageNum(1);
 		}
+		model.addAttribute("pageNum",cri.getPageNum());
+		model.addAttribute("amount",cri.getAmount());
 		cri.set_skip();
 		model.addAttribute("list",service.boardPaging(cri));
 		int total = service.getTotal(cri);
@@ -62,16 +64,16 @@ public class BoardController {
 	}
 	//좋아요
 	@GetMapping("/good")
-	public String good(int bno) {	
+	public String good(int bno,Criteria cri) {	
 		service.good(bno);
-		return"redirect:/board/list";
+		return "redirect:/board/list?pageNum="+cri.getPageNum()+"&amount="+cri.getAmount();
 	
 	}
 	//싫어요
 	@GetMapping("/bad")
-		public String bad(int bno) {
+		public String bad(int bno,Criteria cri) {
 		service.bad(bno);
-		return"redirect:/board/list"; 
+		return "redirect:/board/list?pageNum="+cri.getPageNum()+"&amount="+cri.getAmount(); 
 	}
 	
 	@PostMapping("/register") //등록 처리후 자동으로 목록보기 보여주기

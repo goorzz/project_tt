@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import project.tt.dao.Criteria;
 import project.tt.dao.UserDAO;
 import project.tt.vo.GroupVO;
 import project.tt.vo.NewsVO;
@@ -175,6 +175,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO getPoint(String user_id) {
 		return dao.getPoint(user_id);
+	}
+	// 마이페이지(포인트)	
+	@Override
+	public int getTotal(Criteria cri) { // 게시물 총갯수
+		return dao.getTotal(cri);
+	}
+	
+	@Override
+	public List<PointVO> pointPaging(Criteria cri) {
+		return dao.pointPaging(cri);
 	}
 
 }
