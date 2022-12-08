@@ -39,7 +39,7 @@
 		<!-- 월드컵 조별 보여주기 -->
 		
     	<c:forEach items="${g_list}" var="g_list" >
-    		<button type="button" onclick="location.href='/group?r_group=${g_list}'">${g_list}</button>&nbsp; 	
+    		<button type="button" onclick="location.href='/?r_group=${g_list}'">${g_list}</button>&nbsp; 	
 		</c:forEach>
         <thead>
 			<tr>

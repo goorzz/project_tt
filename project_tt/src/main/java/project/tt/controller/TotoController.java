@@ -19,7 +19,8 @@ public class TotoController {
 	
 	@RequestMapping("/tmain") //게시글 목록보기 /list.jsp
 	public void tmain(ScheduleVO svo,Model model) {
-		
+		System.out.println(svo.getDate());
+		System.out.println(service.getSchedule_predict3(svo.getDate()));
 		model.addAttribute("schedule_date", service.getSchedule_date());
 		model.addAttribute("schedule_predict2",service.getSchedule_predict2(svo.getName_1()));
 		model.addAttribute("schedule_predict4",service.getSchedule_predict4(svo.getName_1()));

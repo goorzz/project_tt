@@ -35,13 +35,14 @@ public class MainController {
 	private UserService service;
 	
 	String user_id;
+	String group;
 	
     LocalDate now = LocalDate.now();   // 현재 날짜 구하기
     DateTimeFormatter format = DateTimeFormatter.ofPattern("MM월d일");   // 포맷 정의
     String today = now.format(format);         // 포맷 적용
 	
 	@RequestMapping("/")
-	public String main(Model model,@RequestParam(value="user_id", required=false) String user_id,HttpSession session)  {
+	public String main(GroupVO gvo, Model model,@RequestParam(value="user_id", required=false) String user_id,HttpSession session)  {
 		
 		ArrayList<String> grouplist = new ArrayList<>(Arrays.asList("A조","B조","C조","D조","E조","F조","G조","H조"));
 		if(!(user_id==null)) {
@@ -49,13 +50,17 @@ public class MainController {
 		}else {
 			this.user_id=this.user_id;
 		}
-		
+		if(!(gvo.getR_group()==null)) {
+			this.group=gvo.getR_group();	
+		}else {
+			this.group="A조";
+		}
         LocalDate now = LocalDate.now();   // 현재 날짜 구하기
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM월d일");   // 포맷 정의
         String today = now.format(format);         // 포맷 적용
 
         model.addAttribute("g_list", grouplist);
-        model.addAttribute("group", service.getGroup_main());
+        model.addAttribute("group", service.getGroup(group));
         model.addAttribute("schedule", service.getSchedule(today));
         model.addAttribute("s_date", today);
         model.addAttribute("news", service.getNews());
@@ -63,31 +68,6 @@ public class MainController {
 
         return "main";
 	}
-	@RequestMapping("/main1")
-	void main1(Model model) {
-
-		ArrayList<String> grouplist = new ArrayList<>(Arrays.asList("A조","B조","C조","D조","E조","F조","G조","H조"));
-	      
-        model.addAttribute("g_list", grouplist);
-        model.addAttribute("group", service.getGroup_main());
-        model.addAttribute("schedule", service.getSchedule(today));
-        model.addAttribute("s_date", service.getSchedule(today).get(0).getDate());
-        model.addAttribute("news", service.getNews());
-	    }
-	
-	@RequestMapping("/group") //a조 화면 열기
-	public String group(GroupVO gvo, Model model) {  
-
-		ArrayList<String> grouplist = new ArrayList<>(Arrays.asList("A조","B조","C조","D조","E조","F조","G조","H조"));
-		
-        model.addAttribute("g_list", grouplist);
-        model.addAttribute("group", service.getGroup(gvo.getR_group()));
-        model.addAttribute("schedule", service.getSchedule(today));
-        model.addAttribute("s_date", today);
-        model.addAttribute("news", service.getNews());
-        
-		return "main";
-}
 	
 	@RequestMapping("/schedule") //더보기 화면
 	public String schedule(ScheduleVO svo, Model model) { 

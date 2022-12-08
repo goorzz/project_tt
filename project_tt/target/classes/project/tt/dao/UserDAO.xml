@@ -103,7 +103,8 @@
 	
 	<!--승부예측용(16강) -->
 	<select id="getSchedule_predict3" resultType="project.tt.vo.ScheduleVO">
-		select * from tt_predict_roundover16 where date=#{date}
+		select * from tt_predict_roundover16 
+		where date=(select date from tt_predict_roundover16 where cast(replace(date,'월','') as signed) > cast(replace(#{date},'월','') as signed) limit 1);
 	</select>
 	
 	<select id="getSchedule_predict4" resultType="project.tt.vo.ScheduleVO">
