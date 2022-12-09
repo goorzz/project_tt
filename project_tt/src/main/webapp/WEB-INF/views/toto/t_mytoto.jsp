@@ -22,6 +22,8 @@
     	<td>${list.date }</td>
 		<td>${list.name_1 } vs ${list.name_2 }</td>
 		<td>${list.predict_w }</td> 
+		
+		
 		<td><input type="button" value="확인"></td> 
 	</tr>
     </c:forEach>
