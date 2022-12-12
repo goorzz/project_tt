@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.tt.dao.UserDAO">
+   
+	<!-- 	목록가져오기    -->
+	<select id="getUser" resultType="project.tt.vo.UserVO">
+    	select * from tt_login
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="register"> 
+  	 insert into tt_login(user_id,user_pw,user_name,user_nickname,user_tel) 
+  	 	values(#{user_id},#{user_pw},#{user_name},#{user_nickname},#{user_tel})
+	</insert>
+	
+	<!-- 정보가져와서 중복체크 -->	
+	<select id="idCheck" resultType="project.tt.vo.UserVO">
+    	select * from tt_login where user_id=#{user_id}
+	</select>
+	
+	<select id="nicknameCheck" resultType="project.tt.vo.UserVO">
+    	select * from tt_login where user_nickname=#{user_nickname}
+	</select>	
+	
+	<select id="telCheck" resultType="project.tt.vo.UserVO">
+    	select * from tt_login where user_tel=#{user_tel}
+	</select>	
+	
+	<select id="nameCheck" resultType="project.tt.vo.UserVO">
+    	select * from tt_login where user_name=#{user_name}
+	</select>	
+	
+	<!-- ID/PW 찾기  -->
+	<select id="idSearch" resultType="project.tt.vo.UserVO">
+    	select user_id from tt_login where user_name=#{user_name} and user_tel=#{user_tel}
+	</select>
+	
+	<select id="pwSearch" resultType="project.tt.vo.UserVO">
+    	select user_pw from tt_login where user_id=#{user_id} and user_tel=#{user_tel}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="loginidpw" resultType="project.tt.vo.UserVO">
+		select * from tt_login where user_id=#{user_id} and user_pw=#{user_pw}
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="modify">
+		update tt_login set user_nickname=#{user_nickname},user_tel=#{user_tel},
+		user_pw=#{user_pw} where user_id=#{user_id} and user_name=#{user_name}	 
+	</update>
+	
+	<!-- 회원삭제 -->
+	<delete id="delete">
+		delete from tt_login where user_id=#{user_id} and user_name=#{user_name}	
+	</delete>
+	
+	<delete id='delete_point'>
+		DELETE from tt_point_info where user_id=#{user_id}
+	</delete>
+	<!-- 비밀번호확인 -->
+	<select id="pw" resultType="project.tt.vo.UserVO"> 
+		select * from tt_login where user_id=#{user_id} and user_pw=#{user_pw}
+	</select>
+	
+	<!-- 조별리그 메인 보기 (main은 A조)-->
+	<select id="getGroup_main" resultType="project.tt.vo.GroupVO">
+		select * from tt_rank where r_group="A조" order by R_RANK
+	</select>
+	
+	<select id="getGroup" resultType="project.tt.vo.GroupVO">
+		select * from tt_rank where r_group=#{r_group} order by R_RANK
+	</select>
+
+	<!--뉴스 쿼리 -->
+	<select id="getNews" resultType="project.tt.vo.NewsVO">
+		select * from tt_news where n_date = date_format(now(),'%Y%m%e')
+	</select>
+	
+	<!--경기일정 쿼리 -->	
+	<select id="getSchedule" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_schedule where date=#{date}
+	</select>
+	
+	<select id="getSchedule_date" resultType="project.tt.vo.ScheduleVO">
+		select distinct date from tt_schedule
+	</select>	
+	
+	<select id="getSchedule_name" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_schedule where name_1=#{name_1} or name_2=#{name_1}
+	</select>	
+	
+	<!--승부예측용 -->
+	<select id="getSchedule_predict" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_predict_groupstage where date=#{date}
+	</select>
+	
+	<select id="getSchedule_predict2" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_predict_groupstage where name_1=#{name_1} or name_2=#{name_1}
+	</select>
+	
+	<!--승부예측용(16강) -->
+	<select id="getSchedule_predict3" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_predict_roundover16 
+		where date=(select date from tt_predict_roundover16 where cast(replace(date,'월','') as signed) > cast(replace(#{date},'월','') as signed) limit 1);
+	</select>
+	
+	<select id="getSchedule_predict4" resultType="project.tt.vo.ScheduleVO">
+		select * from tt_predict_roundover16 where name_1=#{name_1} or name_2=#{name_1}
+	</select>	
+	
+	<!--포인트용 -->
+	<update id="point_join"> <!-- 회원가입시 포인트 추가 -->
+		update tt_login set user_point=(select* from (select user_point+(select point_point from tt_point where point_no='1') 
+		from tt_login where user_id=#{user_id}) as a) where user_id=#{user_id}	 
+	</update>
+	<update id="point_login"> <!-- 로그인시 포인트 추가 -->
+		update tt_login set user_point=(select* from (select user_point+(select point_point from tt_point where point_no='2') 
+		from tt_login where user_id=#{user_id}) as a) where user_id=#{user_id}	 
+	</update>
+	
+	<select id="login_check" resultType="project.tt.vo.PointVO"> <!-- 로그인시 하루 1번만 적립되게 해보자 -->
+		select * from tt_point_info where user_id=#{user_id} and point_content='로그인' and date like CONCAT(#{date},'%')
+	</select>	
+	
+	<update id="point_write"> <!-- 글 작성시 포인트 추가 -->
+		update tt_login set user_point=(select* from (select user_point+(select point_point from tt_point where point_no='4') 
+		from tt_login where user_id=#{user_id}) as a) where user_id=#{user_id} 
+	</update>
+	
+	<select id="write_check" resultType="project.tt.vo.PointVO"> <!-- 글 작성시 하루 3번만 적립되게 해보자  -->
+		select * from tt_point_info where user_id=#{user_id} and point_content='글작성' and date like CONCAT(#{date},'%')
+	</select>	
+	
+	<update id="point_reply"> <!-- 댓글 작성시 포인트 추가 -->
+		update tt_login set user_point=(select* from (select user_point+(select point_point from tt_point where point_no='5') 
+		from tt_login where user_id=#{user_id}) as a) where user_id=#{user_id} 
+	</update>
+	
+	<select id="reply_check" resultType="project.tt.vo.PointVO"> <!-- 댓글 작성시 하루 5번만 적립되게 해보자  -->
+		select * from tt_point_info where user_id=#{user_id} and point_content='댓글작성' and date like CONCAT(#{date},'%')
+	</select>
+	
+	<select id="getPoint" resultType="project.tt.vo.UserVO"> <!-- 회원별 포인트 가져오기 -->
+		select user_point from tt_login where user_id=#{user_id}
+	</select>	
+	
+	<select id="getPoint_list" resultType="project.tt.vo.PointVO"> <!-- 포인트 획득내역 가져오기 -->
+		select * from tt_point_info where user_id=#{user_id}
+	</select>	
+	
+	<insert id="insertPoint_list"> <!-- 포인트 획득내역 추가 -->
+		insert into tt_point_info(user_id,point_content,point_point) values
+		((select * from (select user_id from tt_login where user_id=#{user_id}) as a), 
+		(select * from (select point_content from tt_point where point_no=#{point_no})as b), 
+		(select * from (select point_point from tt_point where point_no=#{point_no})as c));
+	</insert>
+	
+	<!-- 포인트획득목록 페이징하기 -->
+	<select id ="pointPaging" resultType="project.tt.vo.PointVO">
+			select * from(select * from tt_point_info where user_id=#{user_id}
+               order by no desc) as t1 
+          		 limit #{skip},#{amount}
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		select count(*) from tt_point_info where user_id=#{user_id}		
+	</select>
+	
+</mapper>	

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.tt.dao.BoardDAO">
+<sql id="criteria">
+	 <trim prefix="Where (" suffix=")" prefixOverrides="OR">
+	 	<foreach collection="typeArr" item="type">
+	 		<trim prefix="OR">
+		 		<choose>
+		 			<when test="type == 'T'.toString">
+		 				title like concat('%',#{keyword},'%')
+		 			</when>
+		 			<when test="type == 'C'.toString">
+		 				content like concat('%',#{keyword},'%')
+		 			</when>
+		 			<when test="type == 'U'.toString">
+		 				user_nickname like concat('%',#{keyword},'%')
+		 			</when>	 		
+		 		</choose>
+		 	</trim>
+	  	</foreach>
+	 </trim>
+</sql>
+
+	<!-- 자유게시판 목록 페이징하기 -->
+	<select id ="boardPaging" resultType="project.tt.vo.BoardVO">
+			select * from(select * from tt_board
+			
+			<if test="keyword != null">
+				<include refid="criteria"></include>
+			</if>
+               order by bno desc) as t1 
+          		 limit #{skip},#{amount}
+	</select>
+
+	<select id="getList"  resultType="project.tt.vo.BoardVO">
+		select * from tt_board order by bno desc
+	</select>
+	
+	<select id="getTitle" resultType="project.tt.vo.BoardVO">
+		select title from tt_board where bno=#{bno}
+	</select>
+	
+	<!-- 글삽입 insert -->
+	<insert id="insert" >
+		insert into tt_board(title,content,user_nickname) VALUE(#{title},#{content},#{user_nickname})
+	</insert>
+	
+	<!--  글삽입2 InsertSelectKey -->
+	<insert id="InsertSelectKey">
+		<selectKey resultType="int" order ="BEFORE" keyProperty="bno">	
+			select Max(bno)+1 from  tt_board
+		</selectKey>
+		insert into tt_board(title,content,user_nickname) 
+		values(#{title}, #{content}, #{user_nickname})
+	</insert>	
+	
+	<!-- 글수정 -->
+	<update id="update">
+	update tt_board
+	set title=#{title}, content=#{content}, user_nickname=#{user_nickname}, date=now() 
+	where bno=#{bno}
+	</update>
+	
+	<!-- 글삭제  -->
+	<delete id = "delete">
+		delete from tt_board where bno =#{bno}
+	</delete>
+	
+	<!-- 글상세보기  -->
+	<select id="read" resultType="project.tt.vo.BoardVO">
+		select * from tt_board where bno=#{bno}
+	</select>
+
+	<!-- 좋아요 -->
+	<update id="good">
+		update tt_board set good=good+1 where bno=#{bno}
+	</update>
+	<!-- 싫어요 -->
+	<update id="bad">
+		update tt_board set bad=bad+1 where bno=#{bno}
+	</update>
+	
+	<!-- 조회수 -->
+	<update id="view_count">
+		update tt_board set VIEW_COUNT=VIEW_COUNT+1 where bno=#{bno}
+	</update>
+	
+<!-- 전체 게시물 수 -->
+	<select id="getTotal" resultType="int">
+		select count(*)from tt_board
+			<if test="keyword != null">
+   				<include refid="criteria"></include>
+   			</if>
+	</select>
+		<!-- 마이페이지 내가쓴글 보기 -->
+	<select id="mypage_board" resultType="project.tt.vo.BoardVO">
+		select @rownum:=@rownum+1 as rno, bno, title,view_count,date from tt_board where user_nickname=#{user_nickname} and (@rownum:=0)=0 order by rno desc, date
+	</select>
+	<!-- 마이페이지 카운트 갯수 -->
+	<select id="mypage_count" resultType="project.tt.vo.BoardVO" >
+		select count(title)  from tt_board where user_nickname=#{user_nickname} group by user_nickname
+	</select>
+</mapper>
