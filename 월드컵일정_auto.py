@@ -7,7 +7,9 @@ import time
 import sys
 import datetime
 
-def start():
+import threading
+
+def scripts():
     now = datetime.datetime.now()
     for i in range(1,20) :
         if i<4:
@@ -19,7 +21,7 @@ def start():
             cur = con.cursor()    
             #sql 쿼리문
             # sql_insert = "INSERT INTO tt_db (p_no, date, w_group, time, name_1, name_2, score_1, score_2) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-            sql_update =  "UPDATE tt_schedule SET time = %s, score_1 = %s, score_2 = %s WHERE date = %s and p_no = %s"
+            sql_update =  "UPDATE tt_schedule SET time = %s, name_1 = %s, name_2 = %s, score_1 = %s, score_2 = %s WHERE date = %s and p_no = %s"
 
             url = f"https://search.daum.net/search?w=tot&DA=SPV&q=월드컵%20{date}%20일정&rtmaxcoll=SPV"
             # print(url) #url정상적으로 들어가는지 테스트
@@ -67,7 +69,7 @@ def start():
 
             #데이터 삽입
             for i,j in zip(range(int(len(name)/2)),range(0,len(name),2)):
-                cur.execute(sql_update, (time[i],score[j][2:],score[1+j][2:],date,i+1))
+                cur.execute(sql_update, (time[i],name[j],name[1+j],score[j][2:],score[1+j][2:],date,i+1))
                 con.commit()
             con.close()
         else:
@@ -79,7 +81,7 @@ def start():
             cur = con.cursor()    
             #sql 쿼리문
             # sql_insert = "INSERT INTO tt_db (p_no, date, w_group, time, name_1, name_2, score_1, score_2) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-            sql_update =  "UPDATE tt_schedule SET time = %s, score_1 = %s, score_2 = %s WHERE date = %s and p_no = %s"
+            sql_update =  "UPDATE tt_schedule SET time = %s, name_1 = %s, name_2 = %s, score_1 = %s, score_2 = %s WHERE date = %s and p_no = %s"
 
             url = f"https://search.daum.net/search?w=tot&DA=SPV&q=월드컵%20{date}%20일정&rtmaxcoll=SPV"
             # print(url) #url정상적으로 들어가는지 테스트
@@ -131,29 +133,19 @@ def start():
             #데이터 삽입
             for i,j in zip(range(int(len(name)/2)),range(0,len(name),2)):
                 if len(score[j])<4 or len(score[j])>6:
-                    print("여기도 들어감?")
-                    cur.execute(sql_update, (time[i],score[j][2:],score[1+j][2:],date,i+1))
+                    cur.execute(sql_update, (time[i],name[j],name[1+j],score[j][2:],score[1+j][2:],date,i+1))
                     con.commit()
                 else:
-                    print("승부차기 들어감?")
-                    cur.execute(sql_update, (time[i],score[j][2:3]+"("+score[j][5:6]+")",score[1+j][2:3]+"("+score[1+j][5:6]+")",date,i+1))
+                    
+                    cur.execute(sql_update, (time[i],name[j],name[1+j],score[j][2:3]+"("+score[j][5:6]+")",score[1+j][2:3]+"("+score[1+j][5:6]+")",date,i+1))
                     con.commit()
 
-
             con.close()
-
+            print(date)
 
 
     print(now,"수집완료")
+    threading.Timer(10, scripts).start()
 
 
-def exit():
-    print("종료")
-    sys.exit()
-
-# 주기 설정
-schedule.every(30).minutes.do(start)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+scripts()
